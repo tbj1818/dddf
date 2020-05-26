@@ -54,10 +54,14 @@ function navigateToPath(path) {
     uni.navigateTo({
       url: '/pages/outPage/outPage?url=' + path,
     })
-  // } else if (app.globalData.tabBarPath.indexOf(path) >= 0) {
-  //   uni.switchTab({
-  //     url: path,
-  //   })
+  }else if(path.indexOf('recharge') >= 0){
+    uni.switchTab({
+      url: path,
+    })
+  }else if(path.indexOf('order') >= 0){
+    uni.switchTab({
+      url: path,
+    })
   } else {
     uni.navigateTo({
       url: path,

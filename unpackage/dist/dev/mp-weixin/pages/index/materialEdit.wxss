@@ -1,0 +1,19 @@
+
+.uni-form-item.data-v-2e280732 {
+    margin-bottom: 10px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    border-bottom: 1px solid #dcdcdc;
+}
+.page .title.data-v-2e280732 {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 40px;
+    margin-right: 10px;
+}
+.uni-input.data-v-2e280732 {
+  border: 0;
+}
+.h1.data-v-2e280732{font-size:20px; height: 20px; background-color: #F8f8f8; line-height:20px; border-left:3px solid #0077AA; padding:10px; margin:0 auto 20px;}
+

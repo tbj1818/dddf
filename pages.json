@@ -1,14 +1,14 @@
 {
-	"pages": [{
-			"path": "pages/login",
-			"style": {
-				"navigationBarTitleText": "登录"
-			}
-		},
+	"pages": [
 		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "个人中心"
+			}
+		},{
+			"path": "pages/login",
+			"style": {
+				"navigationBarTitleText": "登录"
 			}
 		},
 		{
@@ -62,6 +62,24 @@
 			"path": "pages/index/rechargeHistory",
 			"style": {
 				"navigationBarTitleText": "充值历史"
+			}
+		},
+		{
+			"path": "pages/index/materialEdit",
+			"style": {
+				"navigationBarTitleText": "资料编辑"
+			}
+		},
+		{
+			"path": "pages/index/inviteCard",
+			"style": {
+				"navigationBarTitleText": "邀请卡商"
+			}
+		},
+		{
+			"path": "pages/index/myInvite",
+			"style": {
+				"navigationBarTitleText": "我的邀请"
 			}
 		},
 		{

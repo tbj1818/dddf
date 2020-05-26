@@ -4,16 +4,16 @@
 			<view class="uni-form-item uni-column" style="position: relative;">
 				<view class="title"><i class="iconfont icon-shouji"></i>账户余额</view>
 				<input class="uni-input" v-model="moneyValue" type="number" placeholder="请输入金额" />
-				<button type="primary" class="yzhmbtn orange-red-bg" @click="rechargeBtn ">充值</button>
+				<button type="primary" class="yzhmbtn orange-red-bg" @click="toSubPage('/pages/index/recharge')">充值</button>
 			</view>
-			<view class="uni-form-item uni-column" style="position: relative;">
+			<view class="uni-form-item uni-column" style="position: relative; display: inline-block;width: 100%;">
 				<view class="title"><i class="van-icon van-icon-gold-coin-o"></i>设置佣金<text class="c-orange fs16">(任务手续费按5%收取)</text></view>
 				<input class="uni-input" @input="rateValuedata" v-model="ratedata" type="number" placeholder="请输入佣金" />
 				<!-- 不可点击状态 -->
-				<view class="yzhmbtn">
-					<uni-rate disabled="true" ref="rateStar" :value="rateValue"></uni-rate>
+				<view class="ratewidth">
+					<view class="ratebg" :style="{ width: rateValue*20 + '%' }"></view>
 				</view>
-
+				<!-- <uni-rate  ref="rateStar" :value="rateValue"></uni-rate> -->
 			</view>
 			<view class="uni-form-item uni-column">
 				<view class="title"><i class="van-icon van-icon-friends-o"></i>辅助对象</view>
@@ -22,10 +22,10 @@
 			<view class="uni-form-item uni-column flex" style="height:60px;border-bottom: #dcdcdc solid 1px;">
 				<view class="title"><i class="van-icon van-icon-location-o"></i>选择地区</view>
 				<picker @change="pickerChange($event,'industry')" :value="data.industry" :range="industryList" range-key="value">
-					<view class="uni-input" style="flex:1; margin-left:20px">{{industryList[data.industry].value}}<i class="van-icon van-icon-arrow-down"></i></view>
+					<view class="uni-input noborder" style="flex:1; margin-left:20px">{{industryList[data.industry].value}}<i class="van-icon van-icon-arrow-down"></i></view>
 				</picker>
 			</view>
-			<view class="uni-form-item uni-column" v-if="type==1">
+			<view class="uni-form-item uni-column" style=" display: inline-block;width: 100%;" v-if="type==1">
 				<view class="title"><i class="van-icon van-icon-photo-o"></i>上传二维码</view>
 				<progress :percent="percent" strock-width="10"></progress>
 				<view class="flex">
@@ -43,8 +43,8 @@
 </template>
 
 <script>
-	
-import uniRate from "@/components/uni-rate/uni-rate.vue"
+	// import uniRate from "@/components/uni-rate/uni-rate.vue"
+	import util from '@/utils/http.js'
 	export default {
 		data() {
 			return {
@@ -52,7 +52,7 @@ import uniRate from "@/components/uni-rate/uni-rate.vue"
 				fzhdx: '',
 				qrcodeAdress: '',
 				ratedata: '',
-				type:'',
+				type: '',
 				data: {
 					industry: 0,
 					healthy: 0,
@@ -71,14 +71,16 @@ import uniRate from "@/components/uni-rate/uni-rate.vue"
 					},
 				],
 				percent: 0,
-				rateValue: 3,
+				rateValue: 0,
 				changeimg: 'https://img2.woyaogexing.com/2019/12/22/6a78aeadbf7f4a32825f3486c692b811!400x400.jpeg', // 更改后的头像
 			};
 		},
-		components: {uniRate},
-		onLoad: function (option) { //option为object类型，会序列化上个页面传递的参数
-		    console.log(option.type); //打印出上个页面传递的参数。
-			this.type=option.type
+		components: {
+			// uniRate
+		},
+		onLoad: function(option) { //option为object类型，会序列化上个页面传递的参数
+			console.log(option.type); //打印出上个页面传递的参数。
+			this.type = option.type
 		},
 		watch: {
 			ratedata(e) {
@@ -91,12 +93,15 @@ import uniRate from "@/components/uni-rate/uni-rate.vue"
 				console.log('picker发送选择改变，携带值为', e.target.value)
 				this.data[val] = e.target.value
 			},
-			rechargeBtn(){
+			rechargeBtn() {
 				uni.showToast({
 					title: '充值成功',
 					icon: 'success',
 					duration: 2000
 				})
+			},
+			toSubPage(path) {
+				util.navigateToPath(path)
 			},
 			cI: function() {
 				uni.chooseImage({
@@ -135,6 +140,7 @@ import uniRate from "@/components/uni-rate/uni-rate.vue"
 			rateValuedata(e) {
 				console.log(e)
 				this.rateValue = e.detail.value
+				console.log(this.rateValue)
 			},
 			getdata() {
 				uni.showToast({
@@ -189,12 +195,29 @@ import uniRate from "@/components/uni-rate/uni-rate.vue"
 	}
 
 	.task {
-		margin: 20px auto;
+		margin:0 auto;
 	}
 
 	.headimgsize {
 		width: 100px;
 		height: 100px;
 		margin: 10px 20px
+	}
+
+	.ratewidth {
+		height: 10px;
+		width: 150px;
+		position: absolute;
+		right: 0;
+		bottom: 10px;
+		border: 1px solid #dcdcdc;
+	}
+
+	.ratebg {
+		background: orange;
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 10px;
 	}
 </style>

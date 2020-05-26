@@ -72,8 +72,8 @@
             },
             "splashscreen" : {
                 "android" : {
-                    "hdpi" : "C:/Users/Administrator/Pictures/图片/星空.png",
-                    "xxhdpi" : "C:/Users/Administrator/Pictures/图片/星空.png"
+                    "hdpi" : "",
+                    "xxhdpi" : ""
                 }
             }
         }

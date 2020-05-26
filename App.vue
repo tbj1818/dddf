@@ -1,15 +1,25 @@
 <script>
-export default {
-	onLaunch: function() {
-		console.log('App Launch');
-	},
-	onShow: function() {
-		console.log('App Show');
-	},
-	onHide: function() {
-		console.log('App Hide');
-	}
-};
+	var app;
+	export default {
+		onLaunch: function() {
+			console.log('App Launch')
+			app = getApp();
+			uni.removeStorage({
+				key: 'accountInfo'
+			})
+		},
+		onShow: function() {
+			console.log('App Show')
+			uni.getSystemInfoSync({
+				success(res) {
+					app.globalData.systemInfo = res
+				}
+			})
+		},
+		onHide: function() {
+			console.log('App Hide')
+		}
+	};
 </script>
 
 <style>
@@ -23,11 +33,13 @@ export default {
 	@import './wxcomponents/vant-weapp/col/index.wxss';
 	@import './wxcomponents/vant-weapp/picker/index.wxss';
 	@import './wxcomponents/vant-weapp/tag/index.wxss';
-/* 解决头条小程序组件内引入字体不生效的问题 */
-/* #ifdef MP-TOUTIAO */
-@font-face {
-	font-family: uniicons;
-	src: url('/static/uni.ttf');
-}
-/* #endif */
+
+	/* 解决头条小程序组件内引入字体不生效的问题 */
+	/* #ifdef MP-TOUTIAO */
+	@font-face {
+		font-family: uniicons;
+		src: url('/static/uni.ttf');
+	}
+
+	/* #endif */
 </style>

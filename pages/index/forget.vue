@@ -30,7 +30,7 @@
 		</view>
 
 
-		<button type="primary" class="uni-buttonlogin" @click="getdata">登录</button>
+		<button type="primary" class="uni-buttonlogin" @click="getdata">提交</button>
 
 	</view>
 </template>
@@ -205,14 +205,7 @@
 		box-shadow: 0 2px 5px 0 #f80;
 	}
 
-	.yzhmbtn {
-		position: absolute;
-		right: 0;
-		font-size: 14px;
-		padding: 0 10px;
-		bottom: 10px;
-		border-radius: 0
-	}
+	
 
 	uni-button {
 		margin-top: 30px;

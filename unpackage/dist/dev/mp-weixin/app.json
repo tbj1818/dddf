@@ -1,13 +1,16 @@
 {
   "pages": [
-    "pages/login",
     "pages/index/index",
+    "pages/login",
     "pages/index/forget",
     "pages/index/taskCenter",
     "pages/index/order",
     "pages/index/recharge",
     "pages/index/releaseTask",
     "pages/index/rechargeHistory",
+    "pages/index/materialEdit",
+    "pages/index/inviteCard",
+    "pages/index/myInvite",
     "pages/index/userCenter"
   ],
   "subPackages": [],
@@ -47,6 +50,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap13.json"
+  "usingComponents": {}
 }

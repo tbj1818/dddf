@@ -1,7 +1,12 @@
 <template>
 	<view class="page">
 		<view class='logo'>
-			<img src="http://b-ssl.duitang.com/uploads/item/201707/10/20170710210234_y3Kf5.jpeg" alt='logo' />
+			<!--  #ifdef APP-PLUS -->
+			<img src="https://b-ssl.duitang.com/uploads/item/201707/10/20170710210234_y3Kf5.jpeg" alt='logo' />
+			<!--  #endif  -->
+			<!--  #ifndef  APP-PLUS -->
+			<img src="@/static/images/logo.jpeg" alt='logo' />
+			<!--  #endif  -->
 		</view>
 		<view class="end-title">
 			　<view @tap="change(0)" :class="{btna:btnnum == 0}">登录</view>
@@ -34,11 +39,11 @@
 				<input class="uni-input" v-model="password" type="password" placeholder="请输入密码" />
 			</view>
 			<view class="uni-form-item uni-column">
-				<view class="title"><i class="iconfont icon-mima"></i>邀请码</view>
+				<view class="title"><i class="iconfont icon-yaoqingmatianchong"></i>邀请码</view>
 				<input class="uni-input" v-model="yqmvalue" type="text" placeholder="请输入邀请码" />
 			</view>
 			<view class="uni-form-item uni-column">
-				<view class="title"><i class="iconfont icon-mima"></i>商家</view>
+				<view class="title"><i class="iconfont icon-shangjia1"></i>商家</view>
 				<input class="uni-input" v-model="uservalue" type="text" placeholder="请输入商家" />
 			</view>
 		</view>
@@ -168,8 +173,8 @@
 	}
 
 	.title {
-		height: 40px;
-		line-height: 40px;
+		height:46px;
+		line-height:46px;
 		font-size: 16px;
 		font-weight: bold;
 		display: flex;
@@ -181,7 +186,7 @@
 		line-height: 30px;
 		bottom: 10px;
 		padding: 5px 10px;
-		border-radius: 0
+		border-radius:25px
 	}
 	.uni-text {
 		width: 100%;

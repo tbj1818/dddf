@@ -1,13 +1,6 @@
 
-.uni-steps__row-text.data-v-e8569986 {
-	padding: 0 10px;
-}
-.uni-steps__row-circle.data-v-e8569986 {
-	width: 10px;
-	height: 10px;
-}
 .alipay_pic.data-v-e8569986 {
-	width: 60%;
+	width:30%;
 	margin: 10px auto;
 }
 .alipay_pic ._img.data-v-e8569986 {

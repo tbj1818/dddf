@@ -5,8 +5,7 @@
 			<uni-steps :options="[{title: '查看充值流程，必看'}, {title: '打开支付宝扫码'}, {title: '输入交易订单号'}, {title: '等待平台确认'}]" :active="1"></uni-steps>
 			<view class="van-tag van-tag--round van-tag--danger marT20">
 				<i class="van-icon van-icon-warning-o" style="line-height: inherit; padding: 0px 10px; color: rgb(255, 255, 255); font-size: 20px;">
-				</i>
-				支付宝收款信息(*转帐前请认真核实账户信息，以免造成财产损失!)</view>
+				</i>支付宝收款信息(*转帐前请认真核实账户信息，以免造成财产损失!)</view>
 		</view>
 		<view class="van-cell van-cell--clickable">
 			<i class="van-icon van-icon-alipay" style="font-size: 24px; vertical-align: middle; color: #666;"></i>
@@ -22,13 +21,14 @@
 			</view>
 			<input class="uni-input" maxlength="11" v-model="moneyvalue" type="number" placeholder="请输入充值金额" />
 		</view>
+		<text class="van-tag van-tag--round van-tag--primary margin marL10 fs14">手机版支付宝叫订单号，电脑版叫交易号</text>
 		<view class="uni-form-item uni-column">
 			<view class="title">
-				<i class="van-icon van-icon-balance-list" style="font-size: 24px; vertical-align: middle;color: #666;"></i>交易号<text
-				 class="van-tag van-tag--round van-tag--primary marT20 marL10 fs14">手机版支付宝叫订单号，电脑版叫交易号</text>
+				<i class="van-icon van-icon-balance-list" style="font-size: 24px; vertical-align: middle;color: #666;"></i>交易号
 			</view>
 			<input class="uni-input" maxlength="11" v-model="transactionnum" type="number" placeholder="请输入交易号" />
 		</view>
+		
 		<button type="primary" class="uni-buttonlogin orange-red-bg" @click="getdata">确认提交</button>
 	</view>
 </template>
@@ -59,26 +59,13 @@
 	};
 </script>
 <style scoped>
-	.uni-steps__row-text {
-		padding: 0 10px;
-	}
-
-	.uni-steps__row-circle {
-		width: 10px;
-		height: 10px;
-	}
-
 	.alipay_pic {
-		width: 60%;
+		width:30%;
 		margin: 10px auto;
 	}
-
 	.alipay_pic img {
 		width: 100%;
 		text-align: center;
 	}
-
-	.uni-form-item {
-		padding: 0 16px;
-	}
+	.van-cell{padding: 0;}
 </style>
