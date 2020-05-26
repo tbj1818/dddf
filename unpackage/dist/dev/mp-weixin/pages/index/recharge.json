@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "账号充值",
+  "usingComponents": {
+    "uni-steps": "/components/uni-steps/uni-steps"
+  }
+}

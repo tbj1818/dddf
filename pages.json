@@ -1,0 +1,110 @@
+{
+	"pages": [{
+			"path": "pages/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/index/forget",
+			"style": {
+				"navigationBarTitleText": "忘记密码"
+			}
+		},
+		{
+			"path": "pages/index/taskCenter",
+			"style": {
+				"navigationBarTitleText": "任务中心"
+			}
+		},
+		{
+			"path": "pages/index/order",
+			"style": {
+				"navigationBarTitleText": "订单管理"
+			}
+		},
+		{
+			"path": "pages/index/recharge",
+			"style": {
+				"navigationBarTitleText": "账号充值",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+								"text": "\ue603",
+								"fontSrc": "/static/font/iconfont.ttf",
+								"fontSize": "22px",
+								"float": "right"
+							},
+							{
+								"text": "",
+								"fontSrc": "/static/font/iconfont.ttf",
+								"fontSize": "22px"
+
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/index/releaseTask",
+			"style": {
+				"navigationBarTitleText": "发布任务"
+			}
+		}, 
+		{
+			"path": "pages/index/rechargeHistory",
+			"style": {
+				"navigationBarTitleText": "充值历史"
+			}
+		},
+		{
+			"path": "pages/index/userCenter",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#007AFF",
+		"backgroundColor": "#FFFFFF"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#FF6034",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"height": "50px",
+		"fontSize": "10px",
+		"iconWidth": "24px",
+		"spacing": "3px",
+		"list": [{
+				"pagePath": "pages/index/recharge",
+				"iconPath": "static/images/tabbar1.png",
+				"selectedIconPath": "static/images/tabbar11.png",
+				"text": "充值"
+			},
+			{
+				"pagePath": "pages/index/order",
+				"iconPath": "static/images/tabbar2.png",
+				"selectedIconPath": "static/images/tabbar22.png",
+				"text": "订单"
+			},
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/images/tabbar3.png",
+				"selectedIconPath": "static/images/tabbar33.png",
+				"text": "个人中心"
+			}
+		]
+
+	}
+}

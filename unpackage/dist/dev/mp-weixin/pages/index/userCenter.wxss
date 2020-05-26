@@ -1,0 +1,31 @@
+
+.van-col--12.data-v-bec44ed4 {
+	-webkit-align-self: center;
+	        align-self: center;
+}
+.numthree ._h1.data-v-bec44ed4 {
+	font-size: 22px;
+	font-weight: bold;
+}
+.center-container .content .top .avatar.data-v-bec44ed4 {
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+	-webkit-border-radius: 100%;
+	        border-radius: 100%
+}
+.center-container .content .top .star-box.data-v-bec44ed4 {
+	text-align: center;
+	line-height: 18px;
+	-webkit-border-radius: 9px;
+	        border-radius: 9px;
+	background-color: #fff;
+	color: #fe6a03;
+	padding: 1px 2px
+}
+.center-container .content .cells .van-cell.data-v-bec44ed4 {
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center
+}
+

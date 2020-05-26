@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "发布任务",
+  "usingComponents": {
+    "uni-rate": "/components/uni-rate/uni-rate"
+  }
+}

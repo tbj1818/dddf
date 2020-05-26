@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/login",
+    "pages/index/index",
+    "pages/index/forget",
+    "pages/index/taskCenter",
+    "pages/index/order",
+    "pages/index/recharge",
+    "pages/index/releaseTask",
+    "pages/index/rechargeHistory",
+    "pages/index/userCenter"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#007AFF",
+    "backgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#FF6034",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "height": "50px",
+    "fontSize": "10px",
+    "iconWidth": "24px",
+    "spacing": "3px",
+    "list": [
+      {
+        "pagePath": "pages/index/recharge",
+        "iconPath": "static/images/tabbar1.png",
+        "selectedIconPath": "static/images/tabbar11.png",
+        "text": "充值"
+      },
+      {
+        "pagePath": "pages/index/order",
+        "iconPath": "static/images/tabbar2.png",
+        "selectedIconPath": "static/images/tabbar22.png",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/images/tabbar3.png",
+        "selectedIconPath": "static/images/tabbar33.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap13.json"
+}
