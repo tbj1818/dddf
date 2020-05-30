@@ -5,19 +5,19 @@
 				<view class="cells van-cell-group">
 					<view class="van-cell van-cell--clickable">
 						<view class="van-cell__title"><span>我的账号</span></view>
-						<view class="van-cell__value"><span>15332426604</span></view>
+						<view class="van-cell__value"><span>{{userinfo.account}}</span></view>
 					</view>
 					<view class="van-cell van-cell--clickable">
 						<view class="van-cell__title"><span>QQ号</span></view>
-						<view class="van-cell__value"><span>897867</span></view>
+						<view class="van-cell__value"><span>{{userinfo.linkQq}}</span></view>
 					</view>
 					<view class="van-cell van-cell--clickable">
 						<view class="van-cell__title"><span>微信号</span></view>
-						<view class="van-cell__value"><span>897867</span></view>
+						<view class="van-cell__value"><span>{{userinfo.linkWx}}</span></view>
 					</view>
 					<view class="van-cell van-cell--clickable">
 						<view class="van-cell__title"><span>我的邀请码</span></view>
-						<view class="van-cell__value"><span>DDDF</span></view>
+						<view class="van-cell__value"><span>{{userinfo.inviteCode}}</span></view>
 					</view>
 					<text class="lineText c-blue">修改登录密码</text>
 				</view>
@@ -25,11 +25,11 @@
 					<text class="lineText c-black">收款信息</text>
 					<view class="van-cell van-cell--clickable">
 						<view class="van-cell__title"><span>支付宝账号</span></view>
-						<view class="van-cell__value"><span>15332426604</span></view>
+						<view class="van-cell__value"><span>{{userinfo.linkZfb}}</span></view>
 					</view>
 					<view class="van-cell van-cell--clickable">
 						<view class="van-cell__title"><span>真实姓名</span></view>
-						<view class="van-cell__value"><span>低调的风</span></view>
+						<view class="van-cell__value"><span>{{userinfo.realName}}</span></view>
 					</view>
 					<text class="lineText c-blue">修改支付信息</text>
 				</view>
@@ -40,15 +40,41 @@
 </template>
 
 <script>
-	
+		import util from '@/utils/http.js'
 	export default {
 		components: {},
 		data() {
 			return {
-				
+				userinfo:{}
 			};
 		},
+		onShow() {
+			this.getuserInfo()
+		},
 		methods: {
+			getuserInfo(){
+				let infodata={
+					fromType:2,
+					fromPage:20
+				}
+					util.sendPost('/appUser/getUserInfo', infodata).then((res)=> {
+						console.log(res)
+						if (res.data.code == 0) {
+							uni.showToast({
+								title: res.data.message,
+								icon: 'success',
+							});
+							this.userinfo=res.data.data
+							
+							// console.log(this.balance)
+						}
+					}).catch(res => {
+						uni.showToast({
+							title: '请求失败',
+							icon: 'none',
+						});
+					})
+			},
 		}
 	};
 </script>

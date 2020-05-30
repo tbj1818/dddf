@@ -7,8 +7,16 @@
 				</view>
 				<view class="invitelink">
 					<p><view class="fs16"> 您的推广注册链接</view>http://goxdpc.rt666.cn/orderpc/Reg.html?recommendCode</p>
-					<button type="primary" class="orange-red-bg" @click="copy('http://goxdpc.rt666.cn/orderpc/Reg.html?recommendCode') ">复制</button>
+					<button type="primary" v-clipboard:copy="spread_url"
+					v-clipboard:success="(type) => onCopyResult('success')"
+					v-clipboard:error="(type) => onCopyResult('error')" class="orange-red-bg">复制</button>
 				</view>
+				<!-- <text
+					class="item-btn"
+					v-clipboard:copy="spread_url"
+					v-clipboard:success="(type) => onCopyResult('success')"
+					v-clipboard:error="(type) => onCopyResult('error')">复制
+				</text> -->
 			</view>
 		</view>
 	</view>
@@ -18,27 +26,40 @@
 	export default {
 		components: {},
 		data() {
-			return {}
+			return {
+				spread_url:'http://goxdpc.rt666.cn/orderpc/Reg.html?recommendCode'
+			}
 		},
 		methods: {
-			copy(value) {
-				//提示模板
-				uni.showModal({
-					content: value, //模板中提示的内容
-					confirmText: '复制内容',
-					success: () => { //点击复制内容的后调函数
-						//uni.setClipboardData方法就是讲内容复制到粘贴板
-						uni.setClipboardData({
-							data: value, //要被复制的内容
-							success: () => { //复制成功的回调函数
-								uni.showToast({ //提示
-									title: '复制成功'
-								})
-							}
-						});
-					}
-				});
-			}
+			onCopyResult(type) {
+				if (type==='success') {
+					uni.showToast({ //提示
+						title: '复制成功'
+					})
+				} else {
+					uni.showToast({ //提示
+						title: '复制失败'
+					})
+				}
+			},
+			// copy(value) {
+			// 	//提示模板
+			// 	uni.showModal({
+			// 		content: value, //模板中提示的内容
+			// 		confirmText: '复制内容',
+			// 		success: () => { //点击复制内容的后调函数
+			// 			//uni.setClipboardData方法就是讲内容复制到粘贴板
+			// 			uni.setClipboardData({
+			// 				data: value, //要被复制的内容
+			// 				success: () => { //复制成功的回调函数
+			// 					uni.showToast({ //提示
+			// 						title: '复制成功'
+			// 					})
+			// 				}
+			// 			});
+			// 		}
+			// 	});
+			// }
 		}
 	};
 </script>

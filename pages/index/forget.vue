@@ -26,7 +26,7 @@
 		</view>
 		<view class="uni-form-item uni-column">
 			<view class="title"><i class="iconfont icon-mima"></i>新密码</view>
-			<input class="uni-input" v-model="password" type="password" placeholder="请输入密码" />
+			<input class="uni-input" v-model="password" type="password" placeholder="请输入新密码" />
 		</view>
 
 
@@ -38,8 +38,6 @@
 <script>
 	import {
 		regExpTel,
-		getQueryString,
-		toast
 	} from '../../utils/index.js'
 	import util from '../../utils/http.js'
 	export default {
@@ -49,7 +47,7 @@
 				phone: '',
 				password: '',
 				imgCode: '',
-				imgCodeSrc: '../../static/c1.png',
+				imgCodeSrc: '',
 				timeFlag: '',
 				code: '',
 				yqmvalue: '',
@@ -73,7 +71,6 @@
 				})
 			},
 			getdata() {
-
 				uni.showLoading({
 					title: '加载中'
 				});
@@ -83,50 +80,57 @@
 						icon: 'none',
 					});
 					return false
-				} else if (!this.password) {
+				}else if (!this.imgCode) {
 					uni.showToast({
-						title: '请输入密码',
+						title: '请输入图形验证码',
 						icon: 'none',
 					});
 					return false
+				}else if (!this.code) {
+					uni.showToast({
+						title: '请输入短信验证码',
+						icon: 'none',
+					});
+					return false
+				} else if (!this.password) {
+					uni.showToast({
+						title: '请输入新密码',
+						icon: 'none',
+					});
+					return false
+				}else{
+					// 请求修改密码接口
+					let data = {
+						phone: this.phone,
+						captcha:this.imgCode,
+						timeFlag:this.timeFlag,
+						mobileCaptcha:this.code,
+						regFrom: 50,
+						version: '1.0.0',
+						channel: '小米',
+						fromId:2,
+						reLogonPasswd:this.password,
+						logonPasswd: this.password
+					}
+					util.sendPost('/appUser/updatePwd', data).then(function(res) {
+						console.log(res)
+						if (res.data.code == 0) {
+							// 延时关闭 加载中的 loading框
+							uni.showToast({
+								title: res.data.message,
+								icon: 'success',
+							});
+							uni.navigateTo({
+								url: '/pages/login'
+							});
+						}
+					}).catch(res => {
+						uni.showToast({
+							title: '请求失败',
+							icon: 'none',
+						});
+					})
 				}
-				// uni.navigateTo({
-				// 	url: '../pages/vue/index/index?id=1&name=我是上一个页面带来的参数'
-				// });
-
-				// this.$HTTP({
-				// 	method: 'get',
-				// 	url: '/dpc/app/login',
-				// 	data: {
-				// 		mobile: this.phone,
-				// 		password: this.password
-				// 	},
-				// 	// baseURL:'http://www.buwang.com'
-				// 	// header:'form' 
-				// }).then((res) => {
-				// 		console.log(res)
-				// 		// 存储token
-				// 		uni.setStorage({
-				// 			key: 'token',
-				// 			data: '888888888',
-				// 			success: function() {
-				// 				uni.getStorage({
-				// 					key: 'token',
-				// 					success: function(res) {
-				// 						console.log(res.data);
-				// 					}
-				// 				});
-				// 			}
-				// 		});
-				// 	}
-				// 	// (err)=>{ console.log(err) }
-				// )
-				// this.$ly.router.push('/pages/vue/index/index');
-				// 延时关闭 加载中的 loading框
-				setTimeout(() => {
-					uni.hideLoading()
-				}, 2000)
-				this.$router.push('/pages/vue/index/index')
 				// weqweououio
 
 			},
@@ -141,19 +145,40 @@
 						title: '请输入正确的手机号码',
 						icon: 'none',
 					});
+				} else if (!this.imgCode) {
+					uni.showToast({
+						title: '请输入图形验证码',
+						icon: 'none',
+					});
 				} else {
-					let time = 60
-					console.log(time)
-					this.timer = setInterval(() => {
-						if (time <= 1) {
-							this.codeMsg = '发送验证码'
-							clearInterval(this.timer)
-						} else {
-							time--
-							this.codeMsg = '已发送（' + time + '）'
+					let smsdata = {
+						userPhone: this.phone,
+						modelType: 110,
+						captcha: this.imgCode,
+						timeFlag: this.timeFlag,
+					}
+					util.sendPost('/sms/sendCaptchaSms', smsdata).then(function(res) {
+						console.log(res)
+						if (res.data.code == 0) {
+							let time = 60
+							console.log(time)
+							this.timer = setInterval(() => {
+								if (time <= 1) {
+									this.codeMsg = '发送验证码'
+									clearInterval(this.timer)
+								} else {
+									time--
+									this.codeMsg = '已发送（' + time + '）'
+								}
+							}, 1000)
+							this.code = res.data
 						}
-					}, 1000)
-
+					}).catch(res => {
+						uni.showToast({
+							title: '请求失败',
+							icon: 'none',
+						});
+					})
 				}
 			},
 			change(e) {

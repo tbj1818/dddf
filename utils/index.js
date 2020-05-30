@@ -1,5 +1,5 @@
 /**
- * Created by PanJiaChen on 16/11/18.
+ * Created by tbj on 25/5/20.
  */
 
 /**
@@ -8,7 +8,6 @@
  * @param {string} cFormat
  * @returns {string}
  */
-import Vue from 'vue'
 
 export function parseTime(time, cFormat) {
   if (arguments.length === 0) {
@@ -90,68 +89,17 @@ export function formatTime(time, option) {
     )
   }
 }
-function getQueryString(name) {
-  /*定义正则，用于获取相应参数*/
-  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-  /*字符串截取，获取匹配参数值*/
-  var r = window.location.search.substr(1).match(reg);
-  /*返回参数值*/
-  if (r != null) {
-    return decodeURI(r[2]);
-  } else {
-    return null;
-  }
-}
-function getHashQueryString(name) {
-  if(location.href.split(name+'=')[1]){
-  /*字符串截取，获取匹配参数值*/
-  var r =location.href.split(name+'=')[1].split('&');
-  }
-  /*返回参数值*/
-  if (r != null) {
-    return decodeURI(r[0]);
-  } else {
-    return null;
-  }
-}
+
 function regExpPassword(password){
   let reg = new RegExp(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/);
   return reg.test(password)
 }
-function toast(text='',icon='',width='4rem',position='default',time='2000',type='text'){
-  Toast({
-    message:text,
-    icon:icon,
-    position:position
-  });
-}
+
 function regExpTel(tel){
   let reg = new RegExp(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/);
   return reg.test(tel)
 }
-/**
- * @param {string} url
- * @returns {Object}
- */
-export function param2Obj(url) {
-  const search = url.split('?')[1]
-  if (!search) {
-    return {}
-  }
-  return JSON.parse(
-    '{"' +
-      decodeURIComponent(search)
-        .replace(/"/g, '\\"')
-        .replace(/&/g, '","')
-        .replace(/=/g, '":"')
-        .replace(/\+/g, ' ') +
-      '"}'
-  )
-}
+
 export {
-  getQueryString,
-  getHashQueryString,
   regExpTel,
-  regExpPassword,
-  toast
 }

@@ -5,7 +5,7 @@ module.exports = {
   showTimeSale: showTimeSale,
   setTabBarBadge: setTabBarBadge,
 }
-const baseUrl = "http://dmf.3yx.cn:8088";
+const baseUrl = "http://wenaqing.gicp.net";
 
 // 发起post请求，请求后台
 function sendPost(url, postData) {
@@ -35,7 +35,7 @@ function sendPost(url, postData) {
           })
           setTimeout(function () {
             uni.hideToast();
-            navigateToPath('/pages/getUser/login/login');
+            navigateToPath('/pages/login');
           }, 1500)
         } else {
           resolve(res)
@@ -50,19 +50,17 @@ function sendPost(url, postData) {
 
 // 跳转公用方法
 function navigateToPath(path) {
+	  console.log(path)
   if (path.indexOf('http') == 0) {
     uni.navigateTo({
       url: '/pages/outPage/outPage?url=' + path,
-    })
-  }else if(path.indexOf('recharge') >= 0){
-    uni.switchTab({
-      url: path,
     })
   }else if(path.indexOf('order') >= 0){
     uni.switchTab({
       url: path,
     })
   } else {
+	  console.log(path)
     uni.navigateTo({
       url: path,
     })

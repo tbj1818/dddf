@@ -37,7 +37,6 @@
 </template>
 
 <script>
-	import uniSteps from '@/components/uni-steps/uni-steps.vue'
 	export default {
 		components: {},
 		data() {
@@ -46,21 +45,9 @@
 				transactionnum: ''
 			};
 		},
-		onNavigationBarButtonTap() {
-			console.log("点击了自定义按钮");
-		},
-		components: {
-			uniSteps
-		},
+		
 		methods: {
-			change(e) {
-				this.btnnum = e
-				console.log(this.btnnum)
-			},
-			pickerChange: function(e, val) {
-				console.log('picker发送选择改变，携带值为', e.target.value)
-				this.data[val] = e.target.value
-			},
+			
 		}
 	};
 </script>
