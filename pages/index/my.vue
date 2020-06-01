@@ -5,7 +5,7 @@
 			<view class="content">
 				<view class="top">
 					<view class="flex ">
-						<img @click="toSubPage('/pages/index/index')" class="avatar" src="https://b-ssl.duitang.com/uploads/item/201707/10/20170710210234_y3Kf5.jpeg"
+						<img @click="toSubPage('/pages/index/index')" class="avatar" :src="advertimg"
 						 lazy="loaded">
 						<view class="white padding-left">
 							<view v-if="loginFlag">
@@ -52,7 +52,7 @@
 						<p class="font-13 padding">待接单数</p>
 					</view>
 					<view class=" van-col van-col--6  pointer">
-						<h1>18</h1>
+						<h1>{{goingorder}}</h1>
 						<p class="font-13 padding">正在接单</p>
 					</view>
 				</view>
@@ -123,9 +123,11 @@
 				account: '',
 				inviteCode: '',
 				balance: '',
-				successRate: '',
-				totalReceice: '',
-				totalSuccess: ''
+				successRate: 0,
+				totalReceice:0,
+				totalSuccess: 0,
+				goingorder:0,
+				advertimg:'https://t8.baidu.com/it/u=3571592872,3353494284&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg'
 			};
 		},
 		onShow() {
@@ -153,10 +155,10 @@
 					console.log(res)
 					if (res.data.code == 0) {
 						this.loginFlag = true;
-						uni.showToast({
-							title: res.data.message,
-							icon: 'success',
-						});
+						// uni.showToast({
+						// 	title: res.data.message,
+						// 	icon: 'success',
+						// });
 						this.account = res.data.data.account
 						this.balance = res.data.data.balance
 						this.successRate = res.data.data.successRate
@@ -271,7 +273,7 @@
 	}
 
 	.moneyshow {
-		width: 150px;
+		width:120px;
 		text-align: right;
 		line-height: 26px;
 	}

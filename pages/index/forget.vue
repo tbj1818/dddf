@@ -1,9 +1,5 @@
 <template>
 	<view class="page">
-		<div class='logo'>
-			<img src="http://b-ssl.duitang.com/uploads/item/201707/10/20170710210234_y3Kf5.jpeg" alt='logo' />
-		</div>
-
 
 		<view class="uni-form-item uni-column">
 			<view class="title"><i class="iconfont icon-shouji"></i>手机号</view>

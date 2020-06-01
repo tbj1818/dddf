@@ -2,7 +2,7 @@
 	<view class="page">
 		<view class='logo'>
 			<!--  #ifdef APP-PLUS -->
-			<img src="https://b-ssl.duitang.com/uploads/item/201707/10/20170710210234_y3Kf5.jpeg" alt='logo' />
+			<img :src="logo" alt='logo' />
 			<!--  #endif  -->
 			<!--  #ifndef  APP-PLUS -->
 			<img src="@/static/images/logo.jpeg" alt='logo' />
@@ -84,6 +84,7 @@
 				imgCodeSrc: '',
 				timeFlag: '',
 				codeMsg: '发送验证码',
+				logo:'https://t8.baidu.com/it/u=3571592872,3353494284&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg'
 			};
 		},
 		onLoad: function() {

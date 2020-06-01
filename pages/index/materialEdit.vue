@@ -69,7 +69,6 @@
 				util.sendPost('/appUser/getUserInfo', infodata).then((res) => {
 					console.log(res)
 					if (res.data.code == 0) {
-						this.loginFlag = true;
 						uni.showToast({
 							title: res.data.message,
 							icon: 'success',
@@ -94,7 +93,6 @@
 				util.sendPost(url, this.userinfo).then((res) => {
 					console.log(res)
 					if (res.data.code == 0) {
-						this.loginFlag = true;
 						uni.showToast({
 							title: res.data.message,
 							icon: 'success',

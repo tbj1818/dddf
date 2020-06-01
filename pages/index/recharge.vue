@@ -15,16 +15,16 @@
 		<view class="alipay_pic">
 			<img :src="qrCode" />
 		</view>
-		<view class="uni-form-item uni-column">
+		<view class="uni-form-item uni-column" style="position:relative; display: inline-block;width: 100%;">
 			<view class="title">
 				<i class="van-icon van-icon-gold-coin" style="font-size: 24px; vertical-align: middle;color: #666;"></i>充值金额
 			</view>
 			<input class="uni-input" v-model="moneyvalue" type="number" placeholder="请输入充值金额" />
 		</view>
-		<text class="van-tag van-tag--round van-tag--primary margin marL10 fs14">手机版支付宝叫订单号，电脑版叫交易号</text>
-		<view class="uni-form-item uni-column">
+		
+		<view class="uni-form-item uni-column"  style="position:relative; display: inline-block;width: 100%;">
 			<view class="title">
-				<i class="van-icon van-icon-balance-list" style="font-size: 24px; vertical-align: middle;color: #666;"></i>交易号
+				<i class="van-icon van-icon-balance-list" style="font-size: 24px; vertical-align: middle;color: #666;"></i>交易号<text class="van-tag van-tag--round van-tag--primary margin marL10 fs14">手机版支付宝叫订单号，电脑版叫交易号</text>
 			</view>
 			<input class="uni-input" maxlength="11" v-model="transactionnum" type="number" placeholder="请输入交易号" />
 		</view>

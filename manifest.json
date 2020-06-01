@@ -15,7 +15,11 @@
                 }
             }
         },
-        "title" : "微信辅助"
+        "title" : "微信辅助",
+        "template" : "",
+        "router" : {
+            "mode" : "hash"
+        }
     },
     "app-plus" : {
         "nvueCompiler" : "uni-app",
@@ -49,7 +53,9 @@
                 ]
             },
             "ios" : {},
-            "sdkConfigs" : {},
+            "sdkConfigs" : {
+                "ad" : {}
+            },
             "icons" : {
                 "android" : {
                     "hdpi" : "unpackage/res/icons/72x72.png",
