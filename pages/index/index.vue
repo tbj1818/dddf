@@ -13,20 +13,21 @@
 					 lazy="loaded">
 					<p class="padding-top padding-bottom">原图拍照</p>
 				</div>
-				<div class="flex flex-col flex-align-center padding-top pointer" @click="screenqrcode" style="width: 50%;">
+				<!-- <div class="flex flex-col flex-align-center padding-top pointer" @click="screenqrcode" style="width: 50%;">
 					<img class="img-function" src="https://s1.ax1x.com/2020/05/26/tF5nT1.png" lazy="loaded">
 					<p class="padding-top padding-bottom">扫码确认失败</p>
 				</div>
 				<div class="flex flex-col flex-align-center padding-top pointer" @click="screenqrcode" style="width: 50%;">
 					<img class="img-function" src="https://s1.ax1x.com/2020/05/26/tF5KFx.jpg" lazy="loaded">
 					<p class="padding-top padding-bottom">手机号上传</p>
-				</div>
+				</div> -->
 			</div>
 		</view>
 	</view>
 </template>
 
 <script>
+	import util from '@/utils/http.js'
 	export default {
 		data() {
 			return {
@@ -57,16 +58,20 @@
 					}
 				})
 				//#endif
-
 				// 允许从相机和相册扫码
 				uni.scanCode({
 					success: function(res) {
 						console.log('条码类型：' + res.scanType);
 						console.log('条码内容：' + res.result);
-						uni.showToast({
-							icon: 'success',
-							title: res.result
-						});
+						if(res.result.indexOf("http://") == -1){
+							uni.showToast({
+								icon: 'none',
+								title: '未解析出二维码地址，请重新上传'
+							});
+						}
+						uni.navigateTo({
+						  url: '/pages/index/releaseTask?qucodeurl='+encodeURIComponent(res.result)+'&type=1',
+						})
 					},
 					fail(res) {
 						uni.showToast({

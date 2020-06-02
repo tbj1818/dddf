@@ -11,7 +11,6 @@
 				</view>
 			</scroll-view>
 			<!-- 显示区域 -->
-
 			<view class="list" v-for="(item, index) in navList" :key="index" v-if="tabCurrentIndex === index">
 				<div class="listemes" v-for="(item,index) in orderList" :key="index">
 					<div class="content">
@@ -27,7 +26,6 @@
 								<div class="van-col van-col--12" v-if="item.isFix==1" style="text-align: right;">是否定向：是</div>
 								<div class="van-col van-col--12" v-if="item.isFix==0" style="text-align: right;">是否定向：否</div>
 								<div class="van-col van-col--12">省份：{{item.chooseAreaName}}</div>
-
 							</div>
 							<li></li>
 							<li></li>
@@ -44,8 +42,8 @@
 					</div>
 					<div class="checkstate">
 						<div class="van-row">
-							<div class="van-col van-col--12 textCenter" @click="enterorder(item.rowId,10)" style="border-right: 1px solid rgb(220, 220, 220);">确认</div>
-							<div class="van-col van-col--12 textCenter" @click="enterorder(item.rowId,20)">失败</div>
+							<div class="van-col van-col--12 textCenter" @click="enterorder(item.rowId,10,'确认')" style="border-right: 1px solid rgb(220, 220, 220);">确认</div>
+							<div class="van-col van-col--12 textCenter" @click="enterorder(item.rowId,20,'失败')">失败</div>
 						</div>
 					</div>
 				</div>
@@ -171,9 +169,9 @@
 			},
 			
 			
-			enterorder(orderId,type) {
+			enterorder(orderId,type,text) {
 				uni.showModal({
-					title: '确定要确认订单吗？',
+					title: '确定要'+text+'订单吗？',
 					success: (res) => {
 						if (res.confirm) {
 							let btndata = {
@@ -205,11 +203,10 @@
 				})
 			},
 			// 如果列表滚动到底部将会立即触发这个事件重置 loadmore
-
 			getmorenews: function() {
 				console.log('已触底')
 				uni.showToast({
-					title: '触底加载成功',
+					title: '触底开始加载',
 					icon: 'success',
 				})
 				// if (this.loadingText != '' && this.loadingText != '已加载全部') {
@@ -245,7 +242,7 @@
 		display: inline-block !important;
 		/* 必要，导航栏才能横向*/
 	}
-
+	.wuc-tab{background: #FFF;}
 	.loading {
 		text-align: center;
 		line-height: 80px;
@@ -258,7 +255,6 @@
 		height: 40px;
 		padding: 0 5px;
 		background: #fff;
-		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);
 		position: relative;
 		z-index: 10;
 

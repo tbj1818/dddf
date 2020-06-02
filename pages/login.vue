@@ -138,6 +138,7 @@
 						}
 						try {
 							uni.setStorageSync('accountInfo', userinfo);
+							uni.setStorageSync('inviteCode', res.data.data.inviteCode);
 							uni.setStorageSync('token', res.data.data.token);
 						} catch (e) {
 							//TODO handle the exception

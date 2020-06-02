@@ -6,7 +6,7 @@
 				<text class="moneyLine">{{moneyValue}}</text>
 				<button type="primary" class="yzhmbtn orange-red-bg" @click="toSubPage('/pages/index/recharge')">充值</button>
 			</view>
-			<view class="uni-form-item uni-column" style="position: relative; display: inline-block;width: 100%;">
+			<view class="uni-form-item uni-column" style="position:relative; display: inline-block;width: 100%;">
 				<view class="title"><i class="van-icon van-icon-gold-coin-o"></i>设置佣金<text class="c-orange fs16">(任务手续费按5%收取)</text></view>
 				<input class="uni-input" @input="rateValuedata" v-model="ratedata" type="number" placeholder="请输入佣金" />
 				<!-- 不可点击状态 -->
@@ -37,7 +37,7 @@
 				<progress :percent="percent" strock-width="10"></progress>
 				<view class="flex">
 					<image v-if="changeimg" class="headimgsize" :src="changeimg" mode=""></image>
-					<button type="primary" class="uploadBtn" @tap="uploadPic">点击上传</button>
+					<button type="primary" class="uploadBtn" @click="uploadPic">点击上传</button>
 				</view>
 			</view>
 			<view class="uni-form-item uni-column" v-if="type==1">
@@ -79,6 +79,7 @@
 			// console.log(option.type); //打印出上个页面传递的参数。
 			this.type = option.type
 			this.moneyValue = option.balance
+			this.qrcodeAdress=decodeURIComponent(option.qucodeurl)
 			this.getmatchNeedDcit()
 		},
 		watch: {
@@ -89,7 +90,7 @@
 		},
 		methods: {
 			switch1Change: function(e) {
-				// console.log('switch1 发生 change 事件，携带值为', e.target.value)
+				console.log('switch1 发生 change 事件，携带值为', e.target.value)
 				if (e.target.value) {
 					this.isFix = 1
 				} else {
@@ -115,13 +116,6 @@
 						icon: 'none',
 					});
 				})
-			},
-			rechargeBtn() {
-				// uni.showToast({
-				// 	title: '充值成功',
-				// 	icon: 'success',
-				// 	duration: 2000
-				// })
 			},
 			toSubPage(path) {
 				util.navigateToPath(path)
@@ -171,7 +165,7 @@
 				}
 				let rechargeinfo = {
 					taskPrice: this.rateValue,
-					isFix: 1,
+					isFix:this.isFix,
 					chooseAreaId: this.chooseAreaId,
 					chooseAreaName: this.chooseAreaName,
 					qrcodeUrl: this.qrcodeAdress,
@@ -186,11 +180,11 @@
 							icon: 'success',
 							duration: 2000
 						})
-						// setTimeout(function() {
-						// 	uni.switchTab({
-						// 		url: '/pages/index/index'
-						// 	});
-						// }, 1000)
+						setTimeout(function() {
+							uni.switchTab({
+								url: '/pages/index/my'
+							});
+						}, 1000)
 					}
 				}).catch(res => {
 					uni.showToast({
@@ -198,8 +192,6 @@
 						icon: 'none',
 					});
 				})
-
-
 			}
 		}
 	};

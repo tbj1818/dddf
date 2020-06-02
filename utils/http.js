@@ -1,12 +1,6 @@
-module.exports = {
-  baseUrl: baseUrl,
-  sendPost: sendPost,
-  navigateToPath: navigateToPath,
-  showTimeSale: showTimeSale,
-  setTabBarBadge: setTabBarBadge,
-}
-const baseUrl = "http://wenaqing.gicp.net";
 
+// const baseUrl = "http://wenaqing.gicp.net";			//家里
+const baseUrl = "http://153t69r733.iok.la";			//公司
 // 发起post请求，请求后台
 function sendPost(url, postData) {
   url = baseUrl + url;
@@ -182,3 +176,11 @@ module.exports.check = {
 // }
 
 // export default http
+
+module.exports = {
+  baseUrl: baseUrl,
+  sendPost: sendPost,
+  navigateToPath: navigateToPath,
+  showTimeSale: showTimeSale,
+  setTabBarBadge: setTabBarBadge,
+}

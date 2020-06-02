@@ -29,15 +29,6 @@
 						<view class="c-yellow fs22">￥{{balance}}</view>
 					</view>
 				</view>
-				<!-- <view class="flex white blackbg">
-					<section class="van-col van-col--12">
-						
-					</section>
-					<section class="van-col van-col--12 rightdq">
-						<button class="van-button van-button--default van-button--mini van-button--round"><span class="van-button__text">明细</span></button>
-						<button class="van-button van-button--danger van-button--normal van-button--mini van-button--round"><span class="van-button__text">提现</span></button>
-					</section>
-				</view> -->
 				<view class="flex flex-wrap  flex-justify-around numthree padding grid">
 					<view class=" van-col van-col--6  pointer">
 						<h1>{{totalReceice}}</h1>
@@ -60,11 +51,11 @@
 					<i class="van-icon van-icon van-icon-point-gift" style="font-size:16px;"></i>
 					推荐好友注册并下单，返平台利润的10%-50%！
 				</view>
-				<view class="cells van-cell-group van-hairline--top-bottom">
-					<view class="van-cell van-cell--clickable" @click="linktask(1)">
+				<view class="cells van-cell-group van-hairline--top-bottom" style="border-top:0">
+					<!-- <view class="van-cell van-cell--clickable" @click="linktask(1)">
 						<i class="van-icon van-icon-wechat"></i>
 						<view class="van-cell__title"><span>发布扫码任务</span></view><i class="van-icon van-icon-arrow van-cell__right-icon"></i>
-					</view>
+					</view> -->
 					<view class="van-cell van-cell--clickable" @click="linktask(2)">
 						<i class="van-icon van-icon-fire"></i>
 						<view class="van-cell__title"><span>发布手机任务</span></view><i class="van-icon van-icon-arrow van-cell__right-icon"></i>
@@ -133,14 +124,16 @@
 		onShow() {
 			try {
 				// console.log(uni.getStorageSync('accountInfo'))
+				console.log(uni.getStorageSync('inviteCode'))
 			} catch (e) {
 				console.log(2)
 				//TODO handle the exception
 			};
-			if (uni.getStorageSync('accountInfo').token) {
+			if (uni.getStorageSync('token')) {
 				this.loginFlag = true;
 				// this.account = uni.getStorageSync('accountInfo').account;
-				this.inviteCode = uni.getStorageSync('accountInfo').inviteCode;
+				this.inviteCode = uni.getStorageSync('inviteCode');
+				// console.log(this.inviteCode)
 			}
 			this.getuserInfo()
 		},
@@ -152,7 +145,7 @@
 					fromPage: 10
 				}
 				util.sendPost('/appUser/getUserInfo', infodata).then((res) => {
-					console.log(res)
+					// console.log(res)
 					if (res.data.code == 0) {
 						this.loginFlag = true;
 						// uni.showToast({
@@ -167,6 +160,7 @@
 						}
 						this.totalReceice = res.data.data.totalReceice
 						this.totalSuccess = res.data.data.totalSuccess
+						this.goingorder=res.data.data.jding
 						// console.log(this.balance)
 					}
 				}).catch(res => {
@@ -222,25 +216,6 @@
 					}
 				})
 			},
-
-			// logout() {
-			// 	// #ifdef H5
-			// 	// console.log(1111)
-			// 	uni.reLaunch({
-			// 		url: '/pages/login'
-			// 	})
-			// 	// #endif
-			// 	// #ifdef MP-WEIXIN
-			// 	uni.redirectTo({
-			// 		url: '/pages/login'
-			// 	})
-			// 	// #endif
-
-			// 	uni.reLaunch({
-			// 		url: '/pages/login'
-			// 	})
-			// }
-
 		}
 	};
 </script>
@@ -308,11 +283,7 @@
 	}
 </style>
 <style lang="scss">
-	.blackbg {
-		background: rgba($color: #000000, $alpha: .5);
-		padding: 10px;
-	}
-
+	
 	/* #ifdef MP-ALIPAY */
 	.uni-badge {
 		margin-left: 20rpx;
@@ -323,4 +294,5 @@
 		flex-direction: row;
 		justify-content: flex-start;
 	}
+	.van-hairline--top-bottom:after{border-width:0;}
 </style>

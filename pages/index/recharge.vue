@@ -7,14 +7,14 @@
 				<i class="van-icon van-icon-warning-o" style="line-height: inherit; padding: 0px 10px; color: rgb(255, 255, 255); font-size: 20px;">
 				</i>支付宝收款信息(*转帐前请认真核实账户信息，以免造成财产损失!)</view>
 		</view>
-		<view class="van-cell van-cell--clickable">
+		<view class="van-cell van-cell--clickable marB10">
 			<i class="van-icon van-icon-alipay" style="font-size: 24px; vertical-align: middle; color: #666;"></i>
 			<view class="van-cell__title"><span>收款账号</span></view>
-			<view class="van-cell__value"><span>{{rechargeaccount}}</span></view>
+			<view class="van-cell__value  c-red"><span>{{realName}}{{rechargeaccount}}</span></view>
 		</view>
-		<view class="alipay_pic">
+		<!-- <view class="alipay_pic">
 			<img :src="qrCode" />
-		</view>
+		</view> -->
 		<view class="uni-form-item uni-column" style="position:relative; display: inline-block;width: 100%;">
 			<view class="title">
 				<i class="van-icon van-icon-gold-coin" style="font-size: 24px; vertical-align: middle;color: #666;"></i>充值金额
@@ -39,6 +39,7 @@
 		data() {
 			return {
 				moneyvalue: '',
+				realName:'',
 				transactionnum: '',
 				rechargeaccount:'',
 				qrCode:'https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1910947350,633103490&fm=26&gp=0.jpg'
@@ -62,8 +63,8 @@
 							icon: 'success',
 						});
 						this.rechargeaccount=res.data.data.account
-						this.qrCode=res.data.data.qrCode
-						
+						this.realName=res.data.data.name
+						// this.qrCode=res.data.data.qrCode
 					}
 				}).catch(res => {
 					uni.showToast({
@@ -80,11 +81,15 @@
 				util.sendPost('/appRecharge/recharge', rechargeinfo).then((res) => {
 					console.log(res)
 					if (res.data.code == 0) {
-						
 						uni.showToast({
 							title: res.data.message,
 							icon: 'success',
 						});
+						setTimeout(function() {
+							uni.switchTab({
+								url: '/pages/index/my'
+							});
+						}, 1000)
 					}
 				}).catch(res => {
 					uni.showToast({

@@ -3,35 +3,47 @@
 		<view class="invitebg">
 			<view class="titleH1">推荐好友注册并下单成功后，返平台利润的10%-50%/单！ </view>
 			<view class="invitelinkbottom">
-				<view class="inviteNum"><view class="fs16"> 您的推荐码</view><p>WVLNH1</p>
+				<view class="inviteNum"><view class="fs16"> 您的推荐码</view><p>{{inviteCode}}</p>
 				</view>
 				<view class="invitelink">
-					<p><view class="fs16"> 您的推广注册链接</view>http://goxdpc.rt666.cn/orderpc/Reg.html?recommendCode</p>
+					<p><view class="fs16"> 您的推广注册链接</view>{{inviteUrl}}/?code={{inviteCode}}</p>
+					<!--  #ifdef APP-PLUS -->
+							<button type="primary" @click="paste(spread_url)" class="orange-red-bg">复制</button>
+					<!--  #endif  -->
+					<!--  #ifndef  APP-PLUS -->
+					<button type="primary" v-clipboard:copy="spread_url"
+					<!--  #endif  -->
 					<button type="primary" v-clipboard:copy="spread_url"
 					v-clipboard:success="(type) => onCopyResult('success')"
 					v-clipboard:error="(type) => onCopyResult('error')" class="orange-red-bg">复制</button>
+					
 				</view>
-				<!-- <text
-					class="item-btn"
-					v-clipboard:copy="spread_url"
-					v-clipboard:success="(type) => onCopyResult('success')"
-					v-clipboard:error="(type) => onCopyResult('error')">复制
-				</text> -->
+			
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import baseUrl from '@/utils/http.js'
+	console.log(baseUrl)
 	export default {
 		components: {},
 		data() {
 			return {
-				spread_url:'http://goxdpc.rt666.cn/orderpc/Reg.html?recommendCode'
+				spread_url:'http://goxdpc.rt666.cn/orderpc/Reg.html?recommendCode',
+				inviteCode: '',
+				inviteUrl:baseUrl.baseUrl
+			}
+		},
+		onLoad() {
+			if (uni.getStorageSync('token')) {
+				this.inviteCode = uni.getStorageSync('inviteCode');
 			}
 		},
 		methods: {
 			onCopyResult(type) {
+				this.spread_url=this.inviteUrl+'?code='+this.inviteCode
 				if (type==='success') {
 					uni.showToast({ //提示
 						title: '复制成功'
