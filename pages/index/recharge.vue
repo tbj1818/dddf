@@ -2,7 +2,7 @@
 	<view class="page">
 		<view class="uni-stepsMar">
 			<!-- 基本用法 -->
-			<uni-steps :options="[{title: '查看充值流程，必看'}, {title: '打开支付宝扫码'}, {title: '输入交易订单号'}, {title: '等待平台确认'}]" :active="1"></uni-steps>
+			<uni-steps :options="[{title: '查看充值流程，必看'}, {title: '打开支付宝输入账号转账'}, {title: '输入交易订单号'}, {title: '等待平台确认'}]" :active="1"></uni-steps>
 			<view class="van-tag van-tag--round van-tag--danger marT20">
 				<i class="van-icon van-icon-warning-o" style="line-height: inherit; padding: 0px 10px; color: rgb(255, 255, 255); font-size: 20px;">
 				</i>支付宝收款信息(*转帐前请认真核实账户信息，以免造成财产损失!)</view>

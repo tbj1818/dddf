@@ -474,7 +474,11 @@ var render = function() {
               ),
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(34, "sc"), attrs: { _i: 34 } },
+                {
+                  staticClass: _vm._$g(34, "sc"),
+                  staticStyle: { "border-top": "0" },
+                  attrs: { _i: 34 }
+                },
                 [
                   _c(
                     "v-uni-view",
@@ -497,7 +501,7 @@ var render = function() {
                         { staticClass: _vm._$g(37, "sc"), attrs: { _i: 37 } },
                         [
                           _c("span", { attrs: { _i: 38 } }, [
-                            _vm._v("发布扫码任务")
+                            _vm._v("发布手机任务")
                           ])
                         ],
                         1
@@ -530,7 +534,7 @@ var render = function() {
                         { staticClass: _vm._$g(42, "sc"), attrs: { _i: 42 } },
                         [
                           _c("span", { attrs: { _i: 43 } }, [
-                            _vm._v("发布手机任务")
+                            _vm._v("订单管理")
                           ])
                         ],
                         1
@@ -563,7 +567,7 @@ var render = function() {
                         { staticClass: _vm._$g(47, "sc"), attrs: { _i: 47 } },
                         [
                           _c("span", { attrs: { _i: 48 } }, [
-                            _vm._v("订单管理")
+                            _vm._v("账号充值")
                           ])
                         ],
                         1
@@ -596,7 +600,7 @@ var render = function() {
                         { staticClass: _vm._$g(52, "sc"), attrs: { _i: 52 } },
                         [
                           _c("span", { attrs: { _i: 53 } }, [
-                            _vm._v("账号充值")
+                            _vm._v("邀请卡商")
                           ])
                         ],
                         1
@@ -629,7 +633,7 @@ var render = function() {
                         { staticClass: _vm._$g(57, "sc"), attrs: { _i: 57 } },
                         [
                           _c("span", { attrs: { _i: 58 } }, [
-                            _vm._v("邀请卡商")
+                            _vm._v("我的邀请")
                           ])
                         ],
                         1
@@ -662,7 +666,7 @@ var render = function() {
                         { staticClass: _vm._$g(62, "sc"), attrs: { _i: 62 } },
                         [
                           _c("span", { attrs: { _i: 63 } }, [
-                            _vm._v("我的邀请")
+                            _vm._v("资料编辑")
                           ])
                         ],
                         1
@@ -695,7 +699,7 @@ var render = function() {
                         { staticClass: _vm._$g(67, "sc"), attrs: { _i: 67 } },
                         [
                           _c("span", { attrs: { _i: 68 } }, [
-                            _vm._v("资料编辑")
+                            _vm._v("退出登录")
                           ])
                         ],
                         1
@@ -703,39 +707,6 @@ var render = function() {
                       _c("i", {
                         staticClass: _vm._$g(69, "sc"),
                         attrs: { _i: 69 }
-                      })
-                    ],
-                    1
-                  ),
-                  _c(
-                    "v-uni-view",
-                    {
-                      staticClass: _vm._$g(70, "sc"),
-                      attrs: { _i: 70 },
-                      on: {
-                        click: function($event) {
-                          return _vm.$handleViewEvent($event)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: _vm._$g(71, "sc"),
-                        attrs: { _i: 71 }
-                      }),
-                      _c(
-                        "v-uni-view",
-                        { staticClass: _vm._$g(72, "sc"), attrs: { _i: 72 } },
-                        [
-                          _c("span", { attrs: { _i: 73 } }, [
-                            _vm._v("退出登录")
-                          ])
-                        ],
-                        1
-                      ),
-                      _c("i", {
-                        staticClass: _vm._$g(74, "sc"),
-                        attrs: { _i: 74 }
                       })
                     ],
                     1
@@ -748,11 +719,11 @@ var render = function() {
           ),
           _c(
             "uni-popup",
-            { ref: "popup", attrs: { _i: 75 } },
+            { ref: "popup", attrs: { _i: 70 } },
             [
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(76, "sc"), attrs: { _i: 76 } },
+                { staticClass: _vm._$g(71, "sc"), attrs: { _i: 71 } },
                 [_vm._v("全新PC客户端，体验从未有过的真实游戏世界")]
               )
             ],
@@ -1865,7 +1836,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ 16);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\n.example-body {\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n  -webkit-flex-direction: row;\r\n          flex-direction: row;\r\n  -webkit-box-pack: start;\r\n  -webkit-justify-content: flex-start;\r\n          justify-content: flex-start;\n}\r\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\n.example-body {\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n  -webkit-flex-direction: row;\r\n          flex-direction: row;\r\n  -webkit-box-pack: start;\r\n  -webkit-justify-content: flex-start;\r\n          justify-content: flex-start;\n}\n.van-hairline--top-bottom:after {\r\n  border-width: 0;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -2123,7 +2094,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ 16);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.textTips[data-v-016d7e08]{width:100%; margin: 10px auto; text-align: left; color: #999; line-height:28px;}\n.box[data-v-016d7e08] {\n\tbox-shadow: 0 0 8px #d2eeff;\n\tmargin: 10px 5px 0;\n\tpadding: .5rem 5px;\n\tborder-radius: 5px;\n}\n.box img[data-v-016d7e08] {\n\twidth: 50%;\n}\n", ""]);
+exports.push([module.i, "\n.textTips[data-v-016d7e08] {\n\twidth: 100%;\n\tmargin: 10px auto;\n\ttext-align: left;\n\tcolor: #999;\n\tline-height: 28px;\n}\n.box[data-v-016d7e08] {\n\tbox-shadow: 0 0 8px #d2eeff;\n\tmargin: 10px 5px 0;\n\tpadding: .5rem 5px;\n\tborder-radius: 5px;\n}\n.box img[data-v-016d7e08] {\n\twidth: 50%;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -4480,7 +4451,11 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(9, "sc"), attrs: { _i: 9 } },
-            [_c("span", { attrs: { _i: 10 } }, [_vm._v(_vm._$g(10, "t0-0"))])],
+            [
+              _c("span", { attrs: { _i: 10 } }, [
+                _vm._v(_vm._$g(10, "t0-0") + _vm._$g(10, "t0-1"))
+              ])
+            ],
             1
           )
         ],
@@ -4488,46 +4463,40 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(11, "sc"), attrs: { _i: 11 } },
-        [_c("img", { attrs: { src: _vm._$g(12, "a-src"), _i: 12 } })],
-        1
-      ),
-      _c(
-        "v-uni-view",
         {
-          staticClass: _vm._$g(13, "sc"),
+          staticClass: _vm._$g(11, "sc"),
           staticStyle: {
             position: "relative",
             display: "inline-block",
             width: "100%"
           },
-          attrs: { _i: 13 }
+          attrs: { _i: 11 }
         },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(14, "sc"), attrs: { _i: 14 } },
+            { staticClass: _vm._$g(12, "sc"), attrs: { _i: 12 } },
             [
               _c("i", {
-                staticClass: _vm._$g(15, "sc"),
+                staticClass: _vm._$g(13, "sc"),
                 staticStyle: {
                   "font-size": "24px",
                   "vertical-align": "middle",
                   color: "#666"
                 },
-                attrs: { _i: 15 }
+                attrs: { _i: 13 }
               }),
               _vm._v("充值金额")
             ],
             1
           ),
           _c("v-uni-input", {
-            staticClass: _vm._$g(16, "sc"),
-            attrs: { type: "number", placeholder: "请输入充值金额", _i: 16 },
+            staticClass: _vm._$g(14, "sc"),
+            attrs: { type: "number", placeholder: "请输入充值金额", _i: 14 },
             model: {
-              value: _vm._$g(16, "v-model"),
+              value: _vm._$g(14, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(16, $$v)
+                _vm.$handleVModelEvent(14, $$v)
               },
               expression: "moneyvalue"
             }
@@ -4538,49 +4507,49 @@ var render = function() {
       _c(
         "v-uni-view",
         {
-          staticClass: _vm._$g(17, "sc"),
+          staticClass: _vm._$g(15, "sc"),
           staticStyle: {
             position: "relative",
             display: "inline-block",
             width: "100%"
           },
-          attrs: { _i: 17 }
+          attrs: { _i: 15 }
         },
         [
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
+            { staticClass: _vm._$g(16, "sc"), attrs: { _i: 16 } },
             [
               _c("i", {
-                staticClass: _vm._$g(19, "sc"),
+                staticClass: _vm._$g(17, "sc"),
                 staticStyle: {
                   "font-size": "24px",
                   "vertical-align": "middle",
                   color: "#666"
                 },
-                attrs: { _i: 19 }
+                attrs: { _i: 17 }
               }),
               _vm._v("交易号"),
               _c(
                 "v-uni-text",
-                { staticClass: _vm._$g(20, "sc"), attrs: { _i: 20 } },
+                { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
                 [_vm._v("手机版支付宝叫订单号，电脑版叫交易号")]
               )
             ],
             1
           ),
           _c("v-uni-input", {
-            staticClass: _vm._$g(21, "sc"),
+            staticClass: _vm._$g(19, "sc"),
             attrs: {
               maxlength: "11",
               type: "number",
               placeholder: "请输入交易号",
-              _i: 21
+              _i: 19
             },
             model: {
-              value: _vm._$g(21, "v-model"),
+              value: _vm._$g(19, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(21, $$v)
+                _vm.$handleVModelEvent(19, $$v)
               },
               expression: "transactionnum"
             }
@@ -4591,8 +4560,8 @@ var render = function() {
       _c(
         "v-uni-button",
         {
-          staticClass: _vm._$g(22, "sc"),
-          attrs: { type: "primary", _i: 22 },
+          staticClass: _vm._$g(20, "sc"),
+          attrs: { type: "primary", _i: 20 },
           on: {
             click: function($event) {
               return _vm.$handleViewEvent($event)
@@ -5441,11 +5410,7 @@ var render = function() {
           _vm._$g(24, "i")
             ? _c(
                 "v-uni-view",
-                {
-                  staticClass: _vm._$g(24, "sc"),
-                  staticStyle: { display: "inline-block", width: "100%" },
-                  attrs: { _i: 24 }
-                },
+                { staticClass: _vm._$g(24, "sc"), attrs: { _i: 24 } },
                 [
                   _c(
                     "v-uni-view",
@@ -5455,75 +5420,17 @@ var render = function() {
                         staticClass: _vm._$g(26, "sc"),
                         attrs: { _i: 26 }
                       }),
-                      _vm._v("上传二维码")
-                    ],
-                    1
-                  ),
-                  _c("v-uni-progress", {
-                    attrs: {
-                      percent: _vm._$g(27, "a-percent"),
-                      "strock-width": "10",
-                      _i: 27
-                    }
-                  }),
-                  _c(
-                    "v-uni-view",
-                    { staticClass: _vm._$g(28, "sc"), attrs: { _i: 28 } },
-                    [
-                      _vm._$g(29, "i")
-                        ? _c("v-uni-image", {
-                            staticClass: _vm._$g(29, "sc"),
-                            attrs: {
-                              src: _vm._$g(29, "a-src"),
-                              mode: "",
-                              _i: 29
-                            }
-                          })
-                        : _vm._e(),
-                      _c(
-                        "v-uni-button",
-                        {
-                          staticClass: _vm._$g(30, "sc"),
-                          attrs: { type: "primary", _i: 30 },
-                          on: {
-                            click: function($event) {
-                              return _vm.$handleViewEvent($event)
-                            }
-                          }
-                        },
-                        [_vm._v("点击上传")]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._$g(31, "i")
-            ? _c(
-                "v-uni-view",
-                { staticClass: _vm._$g(31, "sc"), attrs: { _i: 31 } },
-                [
-                  _c(
-                    "v-uni-view",
-                    { staticClass: _vm._$g(32, "sc"), attrs: { _i: 32 } },
-                    [
-                      _c("i", {
-                        staticClass: _vm._$g(33, "sc"),
-                        attrs: { _i: 33 }
-                      }),
                       _vm._v("二维码地址")
                     ],
                     1
                   ),
                   _c("v-uni-input", {
-                    staticClass: _vm._$g(34, "sc"),
-                    attrs: { type: "text", placeholder: "请输入地址", _i: 34 },
+                    staticClass: _vm._$g(27, "sc"),
+                    attrs: { type: "text", placeholder: "请输入地址", _i: 27 },
                     model: {
-                      value: _vm._$g(34, "v-model"),
+                      value: _vm._$g(27, "v-model"),
                       callback: function($$v) {
-                        _vm.$handleVModelEvent(34, $$v)
+                        _vm.$handleVModelEvent(27, $$v)
                       },
                       expression: "qrcodeAdress"
                     }
@@ -5535,8 +5442,8 @@ var render = function() {
           _c(
             "v-uni-button",
             {
-              staticClass: _vm._$g(35, "sc"),
-              attrs: { type: "primary", _i: 35 },
+              staticClass: _vm._$g(28, "sc"),
+              attrs: { type: "primary", _i: 28 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -6351,7 +6258,7 @@ var render = function() {
                     { staticClass: _vm._$g(5, "sc"), attrs: { _i: 5 } },
                     [_vm._v("您的推荐码")]
                   ),
-                  _c("p", { attrs: { _i: 6 } }, [_vm._v("WVLNH1")])
+                  _c("p", { attrs: { _i: 6 } }, [_vm._v(_vm._$g(6, "t0-0"))])
                 ],
                 1
               ),
@@ -6369,7 +6276,7 @@ var render = function() {
                         [_vm._v("您的推广注册链接")]
                       ),
                       _vm._v(
-                        "http://goxdpc.rt666.cn/orderpc/Reg.html?recommendCode"
+                        _vm._$g(8, "t1-0") + "/?code=" + _vm._$g(8, "t1-1")
                       )
                     ],
                     1
@@ -6378,7 +6285,12 @@ var render = function() {
                     "v-uni-button",
                     {
                       staticClass: _vm._$g(10, "sc"),
-                      attrs: { type: "primary", _i: 10 }
+                      attrs: { type: "primary", _i: 10 },
+                      on: {
+                        click: function($event) {
+                          return _vm.$handleViewEvent($event)
+                        }
+                      }
                     },
                     [_vm._v("复制")]
                   )
@@ -6637,7 +6549,7 @@ var render = function() {
             "v-uni-view",
             {
               staticClass: _vm._$g(2, "sc"),
-              staticStyle: { flex: "0 0 60px" },
+              staticStyle: { flex: "0 0 30px" },
               attrs: { _i: 2 }
             },
             [_vm._v("序号")]
@@ -6654,7 +6566,11 @@ var render = function() {
           ),
           _c(
             "v-uni-view",
-            { staticClass: _vm._$g(5, "sc"), attrs: { _i: 5 } },
+            {
+              staticClass: _vm._$g(5, "sc"),
+              staticStyle: { flex: "0 0 80px" },
+              attrs: { _i: 5 }
+            },
             [_vm._v("成功订单数")]
           )
         ],
@@ -6673,7 +6589,7 @@ var render = function() {
               "v-uni-view",
               {
                 staticClass: _vm._$g("7-" + $30, "sc"),
-                staticStyle: { flex: "0 0 60px" },
+                staticStyle: { flex: "0 0 30px" },
                 attrs: { _i: "7-" + $30 }
               },
               [_vm._v(_vm._$g("7-" + $30, "t0-0"))]
@@ -6698,6 +6614,7 @@ var render = function() {
               "v-uni-view",
               {
                 staticClass: _vm._$g("10-" + $30, "sc"),
+                staticStyle: { flex: "0 0 80px" },
                 attrs: { _i: "10-" + $30 }
               },
               [_vm._v(_vm._$g("10-" + $30, "t0-0"))]

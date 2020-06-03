@@ -4,13 +4,11 @@
 			<text class="textTips">提示： 若下单价提高，有助于用户快速接单！（若拍照二维码识别失败，请上传截图二维码）。</text>
 			<div class="flex flex-align-center flex-justify-around flex-wrap padding box">
 				<div class="flex flex-col flex-align-center padding-top pointer" @click="screenqrcode" style="width: 50%;"><img
-					 class="img-function" src="https://s1.ax1x.com/2020/05/26/tF5MY6.jpg"
-					 lazy="loaded">
+					 class="img-function" src="https://s1.ax1x.com/2020/05/26/tF5MY6.jpg" lazy="loaded">
 					<p class="padding-top padding-bottom">扫码下单</p>
 				</div>
-				<div class="flex flex-col flex-align-center padding-top pointer" @click="screenqrcode" style="width: 50%;"><img
-					 class="img-function"  src="https://s1.ax1x.com/2020/05/26/tF5QfK.jpg"
-					 lazy="loaded">
+				<div class="flex flex-col flex-align-center padding-top pointer" @click="uploadFile" style="width: 50%;"><img class="img-function"
+					 src="https://s1.ax1x.com/2020/05/26/tF5QfK.jpg" lazy="loaded">
 					<p class="padding-top padding-bottom">原图拍照</p>
 				</div>
 				<!-- <div class="flex flex-col flex-align-center padding-top pointer" @click="screenqrcode" style="width: 50%;">
@@ -31,8 +29,12 @@
 	export default {
 		data() {
 			return {
-
+				imgListNum: 1,
+				filepath:''
 			};
+		},
+		onLoad() {
+
 		},
 		onShow() {
 
@@ -63,14 +65,19 @@
 					success: function(res) {
 						console.log('条码类型：' + res.scanType);
 						console.log('条码内容：' + res.result);
-						if(res.result.indexOf("http://") == -1){
+						// uni.showToast({
+						// 	icon: 'none',
+						// 	title: res.result
+						// });
+						if (res.result.indexOf("http://") == -1 || res.result.indexOf("https://") == -1) {
 							uni.showToast({
 								icon: 'none',
-								title: '未解析出二维码地址，请重新上传'
+								title: '未解析出地址，请重新扫码或上传'
 							});
+							return false
 						}
 						uni.navigateTo({
-						  url: '/pages/index/releaseTask?qucodeurl='+encodeURIComponent(res.result)+'&type=1',
+							url: '/pages/index/releaseTask?qucodeurl=' + encodeURIComponent(res.result) + '&type=1',
 						})
 					},
 					fail(res) {
@@ -80,12 +87,58 @@
 						});
 					}
 				});
+			},
+			uploadFile() {
+				uni.chooseImage({
+					count: 1, //默认9
+					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sourceType: ['album', 'camera'], //从相册选择
+					success: (res) => {
+						console.log(res)
+						this.filepath=res.tempFilePaths[0]
+						console.log(this.filepath)
+						var data = {
+							token: uni.getStorageSync('token'),
+							fileName: 'imageFile',
+						}
+						uni.uploadFile({
+							url: util.baseUrl + '/appOrder/parseQrcode',
+							filePath:this.filepath,
+							name: 'imageFile',
+							formData: data,
+							// header:{"Content-Type": "multipart/form-data"},
+							success: (res) => {
+								res=JSON.parse(res.data)
+								console.log(res)
+								if (res.code == 0) {
+									uni.navigateTo({
+										url: '/pages/index/releaseTask?qucodeurl=' + encodeURIComponent(res.data.content) + '&type=1',
+									})
+								}else{
+									uni.showToast({
+										title: res.message,
+										icon: 'none',
+										duration: 2000
+									});
+								}
+							}
+						});
+
+					}
+				});
 			}
 		}
 	};
 </script>
 <style scoped>
-	.textTips{width:100%; margin: 10px auto; text-align: left; color: #999; line-height:28px;}
+	.textTips {
+		width: 100%;
+		margin: 10px auto;
+		text-align: left;
+		color: #999;
+		line-height: 28px;
+	}
+
 	.box {
 		box-shadow: 0 0 8px #d2eeff;
 		margin: 10px 5px 0;
@@ -96,7 +149,4 @@
 	.box img {
 		width: 50%;
 	}
-</style>
-<style lang="scss">
-
 </style>

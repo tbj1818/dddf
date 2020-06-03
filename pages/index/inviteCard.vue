@@ -12,10 +12,9 @@
 					<!--  #endif  -->
 					<!--  #ifndef  APP-PLUS -->
 					<button type="primary" v-clipboard:copy="spread_url"
-					<!--  #endif  -->
-					<button type="primary" v-clipboard:copy="spread_url"
 					v-clipboard:success="(type) => onCopyResult('success')"
 					v-clipboard:error="(type) => onCopyResult('error')" class="orange-red-bg">复制</button>
+					<!--  #endif  -->
 					
 				</view>
 			
@@ -31,7 +30,7 @@
 		components: {},
 		data() {
 			return {
-				spread_url:'http://goxdpc.rt666.cn/orderpc/Reg.html?recommendCode',
+				spread_url:'',
 				inviteCode: '',
 				inviteUrl:baseUrl.baseUrl
 			}
@@ -54,24 +53,24 @@
 					})
 				}
 			},
-			// copy(value) {
-			// 	//提示模板
-			// 	uni.showModal({
-			// 		content: value, //模板中提示的内容
-			// 		confirmText: '复制内容',
-			// 		success: () => { //点击复制内容的后调函数
-			// 			//uni.setClipboardData方法就是讲内容复制到粘贴板
-			// 			uni.setClipboardData({
-			// 				data: value, //要被复制的内容
-			// 				success: () => { //复制成功的回调函数
-			// 					uni.showToast({ //提示
-			// 						title: '复制成功'
-			// 					})
-			// 				}
-			// 			});
-			// 		}
-			// 	});
-			// }
+			paste(value) {
+				//提示模板
+				uni.showModal({
+					content: value, //模板中提示的内容
+					confirmText: '复制内容',
+					success: () => { //点击复制内容的后调函数
+						//uni.setClipboardData方法就是讲内容复制到粘贴板
+						uni.setClipboardData({
+							data: value, //要被复制的内容
+							success: () => { //复制成功的回调函数
+								uni.showToast({ //提示
+									title: '复制成功'
+								})
+							}
+						});
+					}
+				});
+			}
 		}
 	};
 </script>

@@ -32,14 +32,14 @@
 				</view>
 
 			</view>
-			<view class="uni-form-item uni-column" style=" display: inline-block;width: 100%;" v-if="type==1">
+			<!-- <view class="uni-form-item uni-column" style=" display: inline-block;width: 100%;" v-if="type==1">
 				<view class="title"><i class="van-icon van-icon-photo-o"></i>上传二维码</view>
 				<progress :percent="percent" strock-width="10"></progress>
 				<view class="flex">
 					<image v-if="changeimg" class="headimgsize" :src="changeimg" mode=""></image>
 					<button type="primary" class="uploadBtn" @click="uploadPic">点击上传</button>
 				</view>
-			</view>
+			</view> -->
 			<view class="uni-form-item uni-column" v-if="type==1">
 				<view class="title"><i class="van-icon van-icon-qr"></i>二维码地址</view>
 				<input class="uni-input" v-model="qrcodeAdress" type="text" placeholder="请输入地址" />
@@ -126,6 +126,7 @@
 						const tempFilePaths = res.tempFilePaths;
 						this.changeimg = tempFilePaths[0]
 						// 调用图片上传接口
+						
 					}
 				});
 			},
