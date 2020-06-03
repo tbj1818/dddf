@@ -1,13 +1,6 @@
 <template>
 	<view class="page">
-		<view class='logo'>
-			<!--  #ifdef APP-PLUS -->
-			<img :src="logo" alt='logo' />
-			<!--  #endif  -->
-			<!--  #ifndef  APP-PLUS -->
-			<img src="@/static/images/logo.jpeg" alt='logo' />
-			<!--  #endif  -->
-		</view>
+			<view class="logokw"></view>
 		<view class="end-title">
 			　<view @tap="change(0)" :class="{btna:btnnum == 0}">登录</view>
 			　<view @tap="change(1)" :class="{btna:btnnum == 1}">注册</view>
@@ -87,8 +80,9 @@
 				logo:'https://t8.baidu.com/it/u=3571592872,3353494284&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg'
 			};
 		},
-		onLoad: function() {
+		onLoad: function(option) {
 			this.getImgPath();
+			this.yqmvalue=option.code
 		},
 		methods: {
 			getImgPath() { //图形验证码
@@ -180,7 +174,7 @@
 				} else {
 					let smsdata = {
 						userPhone: this.phone,
-						modelType: 110,
+						modelType: 100,
 						captcha: this.imgCode,
 						timeFlag: this.timeFlag,
 

@@ -92,6 +92,12 @@
 			}
 		},
 		{
+			"path": "pages/index/download",
+			"style": {
+				"navigationBarTitleText": "下载中心"
+			}
+		},
+		{
 			"path": "pages/index/userCenter",
 			"style": {
 				"navigationBarTitleText": "个人中心"

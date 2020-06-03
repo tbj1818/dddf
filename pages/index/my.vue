@@ -5,11 +5,10 @@
 			<view class="content">
 				<view class="top">
 					<view class="flex ">
-						<img @click="toSubPage('/pages/index/index')" class="avatar" :src="advertimg"
-						 lazy="loaded">
+						<view class="logokw myround"></view>
 						<view class="white padding-left">
 							<view v-if="loginFlag">
-								<navigator url="/pages/index/userCenter" open-type="navigate">
+								<navigator url="/pages/index/materialEdit" open-type="navigate">
 									<p class="font-15">{{account}}</p>
 									<p class="padding-top padding-bottom font-12">推荐码：{{inviteCode}}</p>
 									<view class="flex star-box flex-center"><i class="van-icon van-icon-star" style="color: rgb(254, 106, 3); font-size: 12px;">
@@ -56,10 +55,10 @@
 						<i class="van-icon van-icon-wechat"></i>
 						<view class="van-cell__title"><span>发布扫码任务</span></view><i class="van-icon van-icon-arrow van-cell__right-icon"></i>
 					</view> -->
-					<view class="van-cell van-cell--clickable" @click="linktask(2)">
+					<!-- <view class="van-cell van-cell--clickable" @click="linktask(2)">
 						<i class="van-icon van-icon-fire"></i>
 						<view class="van-cell__title"><span>发布手机任务</span></view><i class="van-icon van-icon-arrow van-cell__right-icon"></i>
-					</view>
+					</view> -->
 					<view class="van-cell van-cell--clickable" @click="toSubPage('/pages/index/order')">
 						<i class="van-icon van-icon-bill"></i>
 						<view class="van-cell__title"><span>订单管理</span></view><i class="van-icon van-icon-arrow van-cell__right-icon"></i>
@@ -220,6 +219,7 @@
 	};
 </script>
 <style scoped>
+	.myround{border-radius:50% ; width: 80px; height: 80px;}
 	.van-col--12 {
 		align-self: center;
 	}

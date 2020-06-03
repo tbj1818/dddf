@@ -10,7 +10,7 @@
 				<view class="invitelink">
 					<image class="padding-top-xl margin-top-sm" style="height:200upx;" :src="qrcode" mode="aspectFit"></image>
 					<p>
-						<view class="fs16"> 您的推广注册链接</view>{{inviteUrl}}/?code={{inviteCode}}
+						<view class="fs16"> 您的推广注册链接</view>{{spread_url}}
 					</p>
 					<!--  #ifdef APP-PLUS -->
 					<!-- <button type="primary" @click="paste(spread_url)" class="orange-red-bg">复制</button> -->
@@ -32,21 +32,21 @@
 
 <script>
 	import QR from "@/utils/wxqrcode.js" // 二维码生成器
-	import baseUrl from '@/utils/http.js'
-	console.log(baseUrl)
+	import webbaseUrl from '@/utils/http.js'
+	// console.log(baseUrl)
 	export default {
 		components: {},
 		data() {
 			return {
 				spread_url: '',
 				inviteCode: '',
-				inviteUrl: baseUrl.baseUrl,
+				inviteUrl: webbaseUrl.webbaseUrl,
 				windowHeight: '',
 			}
 		},
 		onShow() {
 			var that = this;
-			that.spread_url=that.inviteUrl+'?code='+that.inviteCode
+			that.spread_url=that.inviteUrl+'/studio/#/pages/login?code='+that.inviteCode
 			// 获取屏幕高度
 			uni.getSystemInfo({
 				success(res) {
@@ -66,7 +66,7 @@
 		},
 		methods: {
 			copyPath(type, text) {
-				this.spread_url=this.inviteUrl+'?code='+this.inviteCode
+				this.spread_url=this.inviteUrl+'/studio/#/pages/login?code='+this.inviteCode
 				// #ifdef APP-PLUS
 				uni.setClipboardData({
 					data: this.spread_url,

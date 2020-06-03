@@ -3,12 +3,12 @@
 		<view class="wrapper center-container">
 			<text class="textTips">提示： 若下单价提高，有助于用户快速接单！（若拍照二维码识别失败，请上传截图二维码）。</text>
 			<div class="flex flex-align-center flex-justify-around flex-wrap padding box">
-				<div class="flex flex-col flex-align-center padding-top pointer" @click="screenqrcode" style="width: 50%;"><img
-					 class="img-function" src="https://s1.ax1x.com/2020/05/26/tF5MY6.jpg" lazy="loaded">
+				<div class="flex flex-col flex-align-center padding-top pointer" @click="screenqrcode" style="width: 50%;">
+					<view class="screenone"></view>
 					<p class="padding-top padding-bottom">扫码下单</p>
 				</div>
-				<div class="flex flex-col flex-align-center padding-top pointer" @click="uploadFile" style="width: 50%;"><img class="img-function"
-					 src="https://s1.ax1x.com/2020/05/26/tF5QfK.jpg" lazy="loaded">
+				<div class="flex flex-col flex-align-center padding-top pointer" @click="uploadFile" style="width: 50%;">
+					<view class="screentwo"></view>
 					<p class="padding-top padding-bottom">原图拍照</p>
 				</div>
 				<!-- <div class="flex flex-col flex-align-center padding-top pointer" @click="screenqrcode" style="width: 50%;">
@@ -50,6 +50,9 @@
 							uni.showToast({
 								title: '确认成功',
 								icon: 'success',
+							})
+							uni.navigateTo({
+								url:'/pages/index/download'
 							})
 						} else if (res.cancel) {
 							uni.showToast({

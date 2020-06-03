@@ -12,7 +12,7 @@
 			<input type="text" maxlength="4" v-model="imgCode" placeholder="请输入图片验证码"></input>
 
 			<view class="justify-end yzhmbtn">
-				<image :src="imgCodeSrc" @click="getImgPath()" mode="aspectFit" style="height: 65upx;width: 240upx;"></image>
+				<image :src="imgCodeSrc" @click="getImgPath()" mode="aspectFit" style="width:80px;"></image>
 			</view>
 		</view>
 		<view class="uni-form-item uni-column" style="position: relative;">
@@ -186,6 +186,7 @@
 </script>
 
 <style lang="scss">
+	uni-image{height: 30px;}
 	/* #ifdef MP-ALIPAY */
 	.uni-badge {
 		margin-left: 20rpx;

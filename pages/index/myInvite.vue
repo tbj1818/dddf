@@ -12,6 +12,7 @@
 			<view class="listLi">{{item.regTime}}</view>
 			<view class="listLi c-orange" style="flex:0 0 80px">{{item.totalSuccess}}</view>
 		</view>
+		<text v-if="orderList.length==0" class="nodata">暂无数据</text>
 	</view>
 </template>
 
@@ -51,6 +52,6 @@
 </script>
 
 <style scoped>
-.invitelist{width: 95%; margin: 10px auto; display: flex; border-bottom: 1px solid #dcdcdc; padding: 10px 0;}
+.invitelist{width:100%; margin: 10px auto; display: flex; border-bottom: 1px solid #dcdcdc; padding: 10px 0;}
 .listLi{flex: 1; text-align: center;}
 </style>

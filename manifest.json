@@ -18,8 +18,10 @@
         "title" : "微信辅助",
         "template" : "",
         "router" : {
-            "mode" : "hash"
-        }
+            "mode" : "hash",
+            "base" : "/studio/"
+        },
+        "domain" : "http://114.116.73.182:8082/"
     },
     "app-plus" : {
         "nvueCompiler" : "uni-app",
