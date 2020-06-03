@@ -6266,17 +6266,26 @@ var render = function() {
                 "v-uni-view",
                 { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
                 [
+                  _c("v-uni-image", {
+                    staticClass: _vm._$g(8, "sc"),
+                    staticStyle: { height: "200upx" },
+                    attrs: {
+                      src: _vm._$g(8, "a-src"),
+                      mode: "aspectFit",
+                      _i: 8
+                    }
+                  }),
                   _c(
                     "p",
-                    { attrs: { _i: 8 } },
+                    { attrs: { _i: 9 } },
                     [
                       _c(
                         "v-uni-view",
-                        { staticClass: _vm._$g(9, "sc"), attrs: { _i: 9 } },
+                        { staticClass: _vm._$g(10, "sc"), attrs: { _i: 10 } },
                         [_vm._v("您的推广注册链接")]
                       ),
                       _vm._v(
-                        _vm._$g(8, "t1-0") + "/?code=" + _vm._$g(8, "t1-1")
+                        _vm._$g(9, "t1-0") + "/?code=" + _vm._$g(9, "t1-1")
                       )
                     ],
                     1
@@ -6284,15 +6293,15 @@ var render = function() {
                   _c(
                     "v-uni-button",
                     {
-                      staticClass: _vm._$g(10, "sc"),
-                      attrs: { type: "primary", _i: 10 },
+                      staticClass: _vm._$g(11, "sc"),
+                      attrs: { type: "primary", _i: 11 },
                       on: {
                         click: function($event) {
                           return _vm.$handleViewEvent($event)
                         }
                       }
                     },
-                    [_vm._v("复制")]
+                    [_vm._v("点击复制推广链接")]
                   )
                 ],
                 1
@@ -6398,7 +6407,7 @@ var ___CSS_LOADER_URL_IMPORT_0___ = __webpack_require__(/*! ../../static/images/
 exports = ___CSS_LOADER_API_IMPORT___(false);
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = ___CSS_LOADER_GET_URL_IMPORT___(___CSS_LOADER_URL_IMPORT_0___);
 // Module
-exports.push([module.i, "\nuni-page-body[data-v-453c749f] {\n\theight: 100%;\n}\n.page[data-v-453c749f] {\n\theight: 100%;\n\tpadding: 0;\n}\n.invitebg[data-v-453c749f] {\n\twidth: 100%;\n\theight: 100%;\n\tpadding-top: 30px;\n\tbackground: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") no-repeat center 0;\n\tbackground-size: cover;\n}\n.titleH1[data-v-453c749f] {\n\tfont-size:20px;\n\tline-height: 30px; font-weight: bold;\n\tcolor: #FF0; border-radius:25px;\n\twidth: 80%;\n\tmargin: 10px auto;\n\tbackground: rgba(7, 218, 245, .8);\n\tpadding: 10px 20px;\n}\n.inviteNum[data-v-453c749f] {\n\tfont-size:26px;\n\tline-height: 30px;\n\tcolor: yellow;\n\ttext-align: center;\n\twidth: 100%;margin-bottom: 10px;\n}\n.invitelinkbottom[data-v-453c749f] {\n\twidth: 90%;\n\ttext-align: center;\n\tposition: absolute;\n\tbottom:10px;\n\tleft: 30px;\n}\n.invitelink[data-v-453c749f] {\n\twidth: 90%;\n\ttext-align: center;\n\tfont-size: 18px;\n\n\tcolor: #FFF;\n}\n.invitelink p[data-v-453c749f] {\n\twidth: 100%;\n}\n.invitelink .orange-red-bg[data-v-453c749f] {\n\twidth: 160px;\n\theight: 36px;\n\tline-height: 36px;\n\tmargin: 10px auto;\n}\n", ""]);
+exports.push([module.i, "\nuni-page-body[data-v-453c749f] {\n\theight: 100%;\n}\n.page[data-v-453c749f] {\n\theight: 100%;\n\tpadding: 0;\n}\n.invitebg[data-v-453c749f] {\n\twidth: 100%;\n\theight: 100%;\n\tpadding-top: 30px;\n\tbackground: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") no-repeat center 0;\n\tbackground-size: cover;\n}\n.titleH1[data-v-453c749f] {\n\tfont-size: 20px;\n\tline-height: 30px;\n\tfont-weight: bold;\n\tcolor: #FF0;\n\tborder-radius: 25px;\n\twidth: 80%;\n\tmargin: 10px auto;\n\tbackground: rgba(7, 218, 245, .8);\n\tpadding: 10px 20px;\n}\n.inviteNum[data-v-453c749f] {\n\tfont-size: 26px;\n\tline-height: 30px;\n\tcolor: yellow;\n\ttext-align: center;\n\twidth: 100%;\n\tmargin-bottom: 10px;\n}\n.invitelinkbottom[data-v-453c749f] {\n\twidth: 90%;\n\ttext-align: center;\n\tposition: absolute;\n\tbottom:5px;\n\tleft:5%;\n}\n.invitelink[data-v-453c749f] {\n\twidth: 90%; margin: 0 auto;\n\ttext-align: center;\n\tfont-size: 18px;\n\n\tcolor: #FFF;\n}\n.invitelink p[data-v-453c749f] {\n\twidth: 100%;\n}\n.invitelink .orange-red-bg[data-v-453c749f] {\n\twidth: 160px;\n\theight: 36px;\n\tline-height: 36px;\n\tmargin: 10px auto;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
