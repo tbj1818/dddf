@@ -5,7 +5,11 @@
 				<view class="van-cell__title van-field__label" style="flex-basis: 100px; flex:0 0 150px; line-height: 46px;"><span>选择日期</span></view>
 				<view class="van-cell__value van-field__value">
 					<view class="van-field__body">
-						<input type="text" v-model="date" disabled="disabled" @click="onShowDatePicker('date')" class="van-field__control">
+						<view class="value">
+							<DatetimePicker placeholder="请选择日期" defaultValue="2020-06-04" start="2020-06-01" end="2100-01-01" fields="day"
+							 @change="onSelected"></DatetimePicker>
+						</view>
+						<!-- <input type="text" v-model="date" disabled="disabled" @click="onShowDatePicker('date')" class="van-field__control"> -->
 						<view class="van-field__right-icon">
 							<i class="van-icon van-icon-notes-o"></i>
 						</view>
@@ -13,8 +17,8 @@
 				</view>
 			</view>
 
-			<mx-date-picker :show="showPicker" :type="type" :value="value" :show-tips="true" :show-seconds="true" @confirm="onSelected"
-			 @cancel="onSelected" />
+			<!-- <mx-date-picker :show="showPicker" :type="type" :value="value" :show-tips="true" :show-seconds="true" @confirm="onSelected"
+			 @cancel="onSelected" /> -->
 			<!-- 头部 -->
 			<scroll-view class="wuc-tab" scroll-with-animation scroll-x :scroll-left="scrollLeft" @scroll="scroll">
 				<view class="navbar">
@@ -76,7 +80,8 @@
 </template>
 
 <script>
-	import MxDatePicker from "@/components/mx-datepicker/mx-datepicker.vue";
+	// import MxDatePicker from "@/components/mx-datepicker/mx-datepicker.vue";
+	import DatetimePicker from "@/components/biaofun-datetime-picker/biaofun-datetime-picker.vue";
 	import util from '../../utils/http.js'
 	import ReturnTop from '@/components/ReturnTop'
 	import {
@@ -84,7 +89,8 @@
 	} from '../../utils/index.js'
 	export default {
 		components: {
-			MxDatePicker,
+			// MxDatePicker,
+			DatetimePicker,
 			ReturnTop
 		},
 		data() {
@@ -94,10 +100,10 @@
 				scrollLeft: 0,
 				oldScrollLeft: 0,
 				orderList: [],
-				date: parseTime(new Date()),
+				// date: parseTime(new Date()),
 				showPicker: false,
-				type: 'rangetime',
-				value: '',
+				// type: 'rangetime',
+				datevalue:  parseTime(new Date()),
 				navList: [{
 						state: 0,
 						text: '等待扫码',
@@ -144,7 +150,7 @@
 				console.log('start pulldown');
 			}, 1000);
 			uni.startPullDownRefresh();
-			this.getorderListdata(this.tabCurrentIndex + 1,this.date)
+			this.getorderListdata(this.tabCurrentIndex + 1, this.datevalue)
 		},
 		// 下拉刷新
 		onPullDownRefresh() {
@@ -163,16 +169,16 @@
 		methods: {
 			//顶部tab点击
 			tabClick(index) {
-				console.log(this.date)
+				console.log(this.datevalue)
 				this.page = 1;
 				this.tabCurrentIndex = index;
-				this.orderList=[];
-				this.getorderListdata(this.tabCurrentIndex + 1,this.date)
+				this.orderList = [];
+				this.getorderListdata(this.tabCurrentIndex + 1, this.datevalue)
 			},
-			getorderListdata(orderId,startTime) {
+			getorderListdata(orderId, startTime) {
 				let infodata = {
 					orderState: orderId,
-					startTime:startTime,
+					startTime: startTime,
 					limit: 10,
 					offset: this.page
 				}
@@ -208,20 +214,23 @@
 			onShowDatePicker(type) { //显示
 				this.type = type;
 				this.showPicker = true;
-				this.value = this[type];
+				this.datevalue = this[type];
 			},
-			onSelected(e) { //选择
-				this.showPicker = false;
+			onSelected(date) { //选择
+				console.log(date.fmt1)
+				// this.type = type;
+				this.datevalue =date.fmt1;
 				this.page = 1;
-				this.orderList=[];
-				if (e) {
-					this[this.type] = parseTime(e.value);
-					//选择的值
-					console.log('value => ' + e.value);
-					this.value = this[this.type]
-					console.log(this.value)
-					this.getorderListdata(this.tabCurrentIndex + 1,this.value)
-				}
+				this.orderList = [];
+				this.getorderListdata(this.tabCurrentIndex + 1, this.datevalue)
+				// if (e) {
+				// 	this[this.type] = parseTime(e.value);
+				// 	//选择的值
+				// 	// console.log('value => ' + e.value);
+				// 	// this.value = this[this.type]
+				// 	console.log(this.value)
+				// 	this.getorderListdata(this.tabCurrentIndex + 1, this.value)
+				// }
 			},
 			enterorder(orderId, type, text) {
 				uni.showModal({
@@ -268,7 +277,7 @@
 				// 	return false;
 				// }
 				uni.showNavigationBarLoading();
-				this.getorderListdata(this.tabCurrentIndex + 1,this.value)
+				this.getorderListdata(this.tabCurrentIndex + 1, this.datevalue)
 			},
 		}
 	};
@@ -349,7 +358,7 @@
 
 	.list {
 		padding-bottom: 60px;
-		padding-top:90px;
+		padding-top: 90px;
 	}
 
 	.listemes {
@@ -361,9 +370,16 @@
 		background: -webkit-gradient(linear, 0 0, 100% 0, from(#ff9924), to(#fe5300));
 		color: #FFF;
 	}
-	.van-cell{margin-top: 0; padding-top: 0; padding-bottom: 0;}
+
+	.van-cell {
+		margin-top: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
 	.van-cell__value {
 		text-align: center;
+		line-height: 46px;
 	}
 
 	.van-field__body {
@@ -396,6 +412,7 @@
 	uni-page-body {
 		height: 100%;
 	}
+
 	.screenk {
 		width: 100%;
 		height: 50px;
@@ -403,15 +420,17 @@
 		line-height: 50px;
 		text-align: left;
 	}
+
 	.uni-list-cell {
 		display: flex;
 		align-items: center;
 	}
+
 	.page_header {
 		position: fixed;
 		width: 100%;
 		left: 0;
-		top:var(--window-top);
+		top: var(--window-top);
 		z-index: 1;
 	}
 </style>
