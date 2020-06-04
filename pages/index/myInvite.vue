@@ -12,11 +12,17 @@
 			<view class="listLi">{{item.regTime}}</view>
 			<view class="listLi c-orange" style="flex:0 0 80px">{{item.totalSuccess}}</view>
 		</view>
-		<text v-if="orderList.length==0" class="nodata">暂无数据</text>
+		<view v-if="orderList.length==0">
+			<text class="nodataorder">
+			</text>
+			<text class="text-centernodata">暂无数据</text>
+		</view>
+		 <ReturnTop></ReturnTop>
 	</view>
 </template>
 
 <script>
+	import ReturnTop from '@/components/ReturnTop'
 		import util from '../../utils/http.js'
 	export default {
 		components: {},
@@ -24,6 +30,9 @@
 			return {
 				orderList:[]
 			};
+		},
+		components: {
+			ReturnTop
 		},
 		onLoad: function() {
 				this.getOrderList()

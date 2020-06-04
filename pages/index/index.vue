@@ -100,6 +100,9 @@
 						console.log(res)
 						this.filepath=res.tempFilePaths[0]
 						console.log(this.filepath)
+						uni.showLoading({
+							title: '加载中'
+						});
 						var data = {
 							token: uni.getStorageSync('token'),
 							fileName: 'imageFile',

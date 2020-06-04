@@ -13,7 +13,8 @@
                     "changeOrigin" : true,
                     "secure" : false
                 }
-            }
+            },
+            "https" : true
         },
         "title" : "微信辅助",
         "template" : "",

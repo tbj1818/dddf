@@ -1,6 +1,20 @@
 <template>
-	<view class="page">
-		<view class="wrapper center-container">
+	<view class="page wrapper">
+		<view class="page_header">
+			<view class="van-cell van-field">
+				<view class="van-cell__title van-field__label" style="flex-basis: 100px; flex:0 0 150px; line-height: 46px;"><span>选择日期</span></view>
+				<view class="van-cell__value van-field__value">
+					<view class="van-field__body">
+						<input type="text" v-model="date" disabled="disabled" @click="onShowDatePicker('date')" class="van-field__control">
+						<view class="van-field__right-icon">
+							<i class="van-icon van-icon-notes-o"></i>
+						</view>
+					</view>
+				</view>
+			</view>
+
+			<mx-date-picker :show="showPicker" :type="type" :value="value" :show-tips="true" :show-seconds="true" @confirm="onSelected"
+			 @cancel="onSelected" />
 			<!-- 头部 -->
 			<scroll-view class="wuc-tab" scroll-with-animation scroll-x :scroll-left="scrollLeft" @scroll="scroll">
 				<view class="navbar">
@@ -10,52 +24,69 @@
 					</view>
 				</view>
 			</scroll-view>
-			<!-- 显示区域 -->
-			<view class="list" v-for="(item, index) in navList" :key="index" v-if="tabCurrentIndex === index">
-				<div class="listemes" v-for="(item,index) in orderList" :key="index">
-					<div class="content">
-						<div class="tittop">
-							<div class="tittle">{{item.state}}订单：{{item.orderNo}}</div>
-							<div class="emesremark c-grey flex"><em>注册手机号:{{item.studioName}}</em><em class="c-orange">价格:￥{{item.taskPrice}}</em></div>
-						</div>
-						<ul class="emeslistmark">
-							<li class="flex"> 下单时间：{{item.createTime}} </li>
-							<li class="flex"> 手续费：<em class="c-orange">(￥{{item.feePrice}})</em></li>
-							<div class="van-row">
-								<div class="van-col van-col--12">辅助对象：{{item.helpObj}}</div>
-								<div class="van-col van-col--12" v-if="item.isFix==1" style="text-align: right;">是否定向：是</div>
-								<div class="van-col van-col--12" v-if="item.isFix==0" style="text-align: right;">是否定向：否</div>
-								<div class="van-col van-col--12">省份：{{item.chooseAreaName}}</div>
-							</div>
-							<li></li>
-							<li></li>
-						</ul>
-						<view class="tips subject-status-1" v-if="item.orderState==1">等待扫码</view>
-						<view class="tips subject-status-2" v-if="item.orderState==2">正在扫码</view>
-						<view class="tips subject-status-3" v-if="item.orderState==3">等待确认</view>
-						<view class="tips subject-status-4" v-if="item.orderState==4">订单纠纷</view>
-						<view class="tips subject-status-5" v-if="item.orderState==5">订单完成</view>
-						<view class="tips subject-status-1" v-if="item.orderState==6">订单失败</view>
-						<view class="tips subject-status-2" v-if="item.orderState==7">超时退款</view>
-						<!---->
-						<!---->
-					</div>
-					<div class="checkstate">
-						<div class="van-row">
-							<div class="van-col van-col--12 textCenter" @click="enterorder(item.rowId,10,'确认')" style="border-right: 1px solid rgb(220, 220, 220);">确认</div>
-							<div class="van-col van-col--12 textCenter" @click="enterorder(item.rowId,20,'失败')">失败</div>
-						</div>
-					</div>
-				</div>
-				<view class="loading">{{loadingText}}</view>
-			</view>
 		</view>
+		<!-- 显示区域 -->
+		<view class="list" v-for="(item, index) in navList" :key="index" v-if="tabCurrentIndex === index">
+			<view class="listemes" v-for="(item,index) in orderList" :key="index">
+				<view class="content">
+					<view class="tittop">
+						<view class="tittle">{{item.state}}订单：{{item.orderNo}}</view>
+						<view class="emesremark c-grey flex"><em>注册手机号:{{item.studioName}}</em><em class="c-orange">价格:￥{{item.taskPrice}}</em></view>
+					</view>
+					<ul class="emeslistmark">
+						<li class="flex"> 下单时间：{{item.createTime}} </li>
+						<li class="flex"> 手续费：<em class="c-orange">(￥{{item.feePrice}})</em></li>
+						<view class="van-row">
+							<view class="van-col van-col--12">辅助对象：{{item.helpObj}}</view>
+							<view class="van-col van-col--12" v-if="item.isFix==1" style="text-align: right;">是否定向：是</view>
+							<view class="van-col van-col--12" v-if="item.isFix==0" style="text-align: right;">是否定向：否</view>
+							<view class="van-col van-col--12">省份：{{item.chooseAreaName}}</view>
+						</view>
+						<li></li>
+						<li></li>
+					</ul>
+					<view class="tips subject-status-1" v-if="item.orderState==1">等待扫码</view>
+					<view class="tips subject-status-2" v-if="item.orderState==2">正在扫码</view>
+					<view class="tips subject-status-3" v-if="item.orderState==3">等待确认</view>
+					<view class="tips subject-status-4" v-if="item.orderState==4">订单纠纷</view>
+					<view class="tips subject-status-5" v-if="item.orderState==5">订单完成</view>
+					<view class="tips subject-status-1" v-if="item.orderState==6">订单失败</view>
+					<view class="tips subject-status-2" v-if="item.orderState==7">超时退款</view>
+					<!---->
+					<!---->
+				</view>
+				<view class="checkstate" v-if="item.orderState==3">
+					<view class="van-row">
+						<view class="van-col van-col--12 textCenter" @click="enterorder(item.rowId,10,'确认')" style="border-right: 1px solid rgb(220, 220, 220);">确认</view>
+						<view class="van-col van-col--12 textCenter" @click="enterorder(item.rowId,20,'失败')">失败</view>
+					</view>
+				</view>
+			</view>
+			<view class="loading">{{loadingText}}</view>
+			<view v-if="orderList.length==0">
+				<text class="nodataorder">
+				</text>
+				<text class="text-centernodata">暂无数据</text>
+			</view>
+			<ReturnTop></ReturnTop>
+		</view>
+
+	</view>
 	</view>
 </template>
 
 <script>
+	import MxDatePicker from "@/components/mx-datepicker/mx-datepicker.vue";
 	import util from '../../utils/http.js'
+	import ReturnTop from '@/components/ReturnTop'
+	import {
+		parseTime
+	} from '../../utils/index.js'
 	export default {
+		components: {
+			MxDatePicker,
+			ReturnTop
+		},
 		data() {
 			return {
 				tabCurrentIndex: 0,
@@ -63,6 +94,10 @@
 				scrollLeft: 0,
 				oldScrollLeft: 0,
 				orderList: [],
+				date: parseTime(new Date()),
+				showPicker: false,
+				type: 'rangetime',
+				value: '',
 				navList: [{
 						state: 0,
 						text: '等待扫码',
@@ -109,7 +144,7 @@
 				console.log('start pulldown');
 			}, 1000);
 			uni.startPullDownRefresh();
-			this.getorderListdata(1)
+			this.getorderListdata(this.tabCurrentIndex + 1,this.date)
 		},
 		// 下拉刷新
 		onPullDownRefresh() {
@@ -128,13 +163,16 @@
 		methods: {
 			//顶部tab点击
 			tabClick(index) {
-				this.page=1;
-				this.tabCurrentIndex =index;
-				this.getorderListdata(this.tabCurrentIndex+1)
+				console.log(this.date)
+				this.page = 1;
+				this.tabCurrentIndex = index;
+				this.orderList=[];
+				this.getorderListdata(this.tabCurrentIndex + 1,this.date)
 			},
-			getorderListdata(orderId) {
+			getorderListdata(orderId,startTime) {
 				let infodata = {
-					orderId:orderId,
+					orderState: orderId,
+					startTime:startTime,
 					limit: 10,
 					offset: this.page
 				}
@@ -149,7 +187,7 @@
 						this.page++;
 						this.orderList.push(...res.data.data.list);
 						if (res.data.data.list.length == 0) {
-							console.log('已加载全部')
+							// console.log('已加载全部')
 							uni.hideNavigationBarLoading();
 							this.loadingText = '已加载全部';
 							return false;
@@ -167,16 +205,32 @@
 			scroll: function(e) {
 				this.oldScrollLeft = e.detail.scrollLeft
 			},
-			
-			
-			enterorder(orderId,type,text) {
+			onShowDatePicker(type) { //显示
+				this.type = type;
+				this.showPicker = true;
+				this.value = this[type];
+			},
+			onSelected(e) { //选择
+				this.showPicker = false;
+				this.page = 1;
+				this.orderList=[];
+				if (e) {
+					this[this.type] = parseTime(e.value);
+					//选择的值
+					console.log('value => ' + e.value);
+					this.value = this[this.type]
+					console.log(this.value)
+					this.getorderListdata(this.tabCurrentIndex + 1,this.value)
+				}
+			},
+			enterorder(orderId, type, text) {
 				uni.showModal({
-					title: '确定要'+text+'订单吗？',
+					title: '确定要' + text + '订单吗？',
 					success: (res) => {
 						if (res.confirm) {
 							let btndata = {
 								orderId: orderId,
-								confirmType:type,
+								confirmType: type,
 							}
 							util.sendPost('/appOrder/confirmOrder', btndata).then((res) => {
 								console.log(res)
@@ -214,7 +268,7 @@
 				// 	return false;
 				// }
 				uni.showNavigationBarLoading();
-				this.getorderListdata()
+				this.getorderListdata(this.tabCurrentIndex + 1,this.value)
 			},
 		}
 	};
@@ -242,11 +296,14 @@
 		display: inline-block !important;
 		/* 必要，导航栏才能横向*/
 	}
-	.wuc-tab{background: #FFF;}
+
+	.wuc-tab {
+		background: #FFF;
+	}
+
 	.loading {
 		text-align: center;
-		line-height: 80px;
-		padding-bottom: 60px;
+		line-height: 60px;
 		color: #000
 	}
 
@@ -290,12 +347,9 @@
 		height: auto;
 	}
 
-
-	.page {
-		margin: 0;
-		padding: 0;
-		height: 100%;
-		background-color: #f8f8f8;
+	.list {
+		padding-bottom: 60px;
+		padding-top:90px;
 	}
 
 	.listemes {
@@ -306,6 +360,15 @@
 		padding: 0 10px;
 		background: -webkit-gradient(linear, 0 0, 100% 0, from(#ff9924), to(#fe5300));
 		color: #FFF;
+	}
+	.van-cell{margin-top: 0; padding-top: 0; padding-bottom: 0;}
+	.van-cell__value {
+		text-align: center;
+	}
+
+	.van-field__body {
+		display: flex;
+		align-items: center;
 	}
 
 	.uni-swiper-wrapper {
@@ -333,7 +396,6 @@
 	uni-page-body {
 		height: 100%;
 	}
-
 	.screenk {
 		width: 100%;
 		height: 50px;
@@ -341,9 +403,15 @@
 		line-height: 50px;
 		text-align: left;
 	}
-
 	.uni-list-cell {
 		display: flex;
 		align-items: center;
+	}
+	.page_header {
+		position: fixed;
+		width: 100%;
+		left: 0;
+		top:var(--window-top);
+		z-index: 1;
 	}
 </style>

@@ -728,7 +728,7 @@ body {
 
 .tittop .tittle {
 	width: 100%;
-	font-size: 18px;
+	font-size:16px;
 	font-weight: bold;
 	text-align: left;
 	line-height: 40px;
@@ -2100,6 +2100,16 @@ a.pink {
 	color: #999;
 	width: 100%;line-height: 50px;
 }
+.nodataorder {
+		width: 60%;
+		height: 100px;
+		margin: 10px 20%;
+		text-align: center;
+		display: inline-block;
+		background: url(@/static/images/nothing.png) no-repeat center center;
+		background-size: contain; opacity: .5;
+	}
+	.text-centernodata{text-align: center;width: 100%; color:#999; display: inline-block; line-height: 40px;}
 .van-divider {
 	margin: 0;
 }

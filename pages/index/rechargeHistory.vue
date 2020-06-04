@@ -13,14 +13,22 @@
 			<view v-if="item.orderStat==20" class="tips subject-status-0">充值成功</view>
 			<view v-if="item.orderStat==30" class="tips subject-status-2">充值失败</view>
 		</view>
-		
+		<view v-if="rechargehisyoryList.length==0">
+			<text class="nodataorder">
+			</text>
+			<text class="text-centernodata">暂无数据</text>
+		</view>
+		<ReturnTop></ReturnTop>
 	</view>
 </template>
 
 <script>
+	import ReturnTop from '@/components/ReturnTop'
 	import util from '../../utils/http.js'
 	export default {
-		components: {},
+		components: {
+			ReturnTop
+		},
 		data() {
 			return {
 				rechargehisyoryList: [],
