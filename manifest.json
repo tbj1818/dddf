@@ -1,5 +1,5 @@
 {
-    "name" : "微信辅助",
+    "name" : "神码",
     "appid" : "__UNI__F6B408F",
     "description" : "",
     "versionName" : "1.0.0",
@@ -9,14 +9,14 @@
         "devServer" : {
             "proxy" : {
                 "/" : {
-                    "target" : "http://wenaqing.gicp.net",
+                    "target" : "http://114.116.73.182:8080",
                     "changeOrigin" : true,
                     "secure" : false
                 }
             },
-            "https" : true
+            "https" : false
         },
-        "title" : "微信辅助",
+        "title" : "神码",
         "template" : "",
         "router" : {
             "mode" : "hash",

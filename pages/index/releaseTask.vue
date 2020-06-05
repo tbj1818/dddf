@@ -17,7 +17,7 @@
 			</view>
 			<view class="uni-form-item uni-column">
 				<view class="title"><i class="van-icon van-icon-friends-o"></i>辅助对象</view>
-				<input class="uni-input" v-model="helpObj" type="text" placeholder="请输入辅助对象" />
+				<input class="uni-input" v-model="helpObj" maxlength="11" type="text" placeholder="请输入辅助对象" />
 			</view>
 			<view class="uni-form-item uni-column flex" style="height:60px;border-bottom: #dcdcdc solid 1px; justify-content:space-between">
 				<view class="title"><i class="van-icon van-icon-location-o"></i>选择地区</view>

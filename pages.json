@@ -30,6 +30,12 @@
 			"style": {
 				"navigationBarTitleText": "任务中心"
 			}
+		},	
+		{
+			"path": "pages/index/gonggao",
+			"style": {
+				"navigationBarTitleText": "公告中心"
+			}
 		},
 		{
 			"path": "pages/index/order",

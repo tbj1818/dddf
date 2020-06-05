@@ -10,7 +10,7 @@
 			<div  class="flex flex-align-center flex-col logo marT20" >
 				<view class="logokw"></view>
 				<!-- <img alt="logo"  src="https://ss0.bdstatic.com/-0U0b8Sm1A5BphGlnYG/kmarketingadslogo/f3392ec77c582d78d3b989d8ffa8f366_250_250.jpg" lazy="loaded" > -->
-				<p class="text-center">微信辅助APP下载</p>
+				<p class="text-center">神码APP下载</p>
 				<div  class="text-center">
 					<button  class="gradient-btn van-button van-button--default van-button--normal"
 					 style="width: 100%;">

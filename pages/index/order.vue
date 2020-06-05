@@ -2,23 +2,15 @@
 	<view class="page wrapper">
 		<view class="page_header">
 			<view class="van-cell van-field">
-				<view class="van-cell__title van-field__label" style="flex-basis: 100px; flex:0 0 150px; line-height: 46px;"><span>选择日期</span></view>
-				<view class="van-cell__value van-field__value">
-					<view class="van-field__body">
-						<view class="value">
-							<DatetimePicker placeholder="请选择日期" defaultValue="2020-06-04" start="2020-06-01" end="2100-01-01" fields="day"
-							 @change="onSelected"></DatetimePicker>
-						</view>
-						<!-- <input type="text" v-model="date" disabled="disabled" @click="onShowDatePicker('date')" class="van-field__control"> -->
-						<view class="van-field__right-icon">
-							<i class="van-icon van-icon-notes-o"></i>
-						</view>
-					</view>
+				<view class="van-cell__title"><span>选择日期</span></view>
+				<view class="value">
+					<picker mode="date" :value="datevalue" :start="startDate" :end="endDate" @change="onSelected">
+						<view class="uni-input">{{datevalue}}</view>
+					</picker>
 				</view>
-			</view>
+				<i class="van-icon van-icon-arrow van-cell__right-icon"></i>
 
-			<!-- <mx-date-picker :show="showPicker" :type="type" :value="value" :show-tips="true" :show-seconds="true" @confirm="onSelected"
-			 @cancel="onSelected" /> -->
+			</view>
 			<!-- 头部 -->
 			<scroll-view class="wuc-tab" scroll-with-animation scroll-x :scroll-left="scrollLeft" @scroll="scroll">
 				<view class="navbar">
@@ -80,8 +72,6 @@
 </template>
 
 <script>
-	// import MxDatePicker from "@/components/mx-datepicker/mx-datepicker.vue";
-	import DatetimePicker from "@/components/biaofun-datetime-picker/biaofun-datetime-picker.vue";
 	import util from '../../utils/http.js'
 	import ReturnTop from '@/components/ReturnTop'
 	import {
@@ -89,8 +79,6 @@
 	} from '../../utils/index.js'
 	export default {
 		components: {
-			// MxDatePicker,
-			DatetimePicker,
 			ReturnTop
 		},
 		data() {
@@ -100,10 +88,10 @@
 				scrollLeft: 0,
 				oldScrollLeft: 0,
 				orderList: [],
-				// date: parseTime(new Date()),
 				showPicker: false,
-				// type: 'rangetime',
-				datevalue:  parseTime(new Date()),
+				startDate: '2020-01-01',
+				endDate: '',
+				datevalue: parseTime(new Date()),
 				navList: [{
 						state: 0,
 						text: '等待扫码',
@@ -197,6 +185,9 @@
 							uni.hideNavigationBarLoading();
 							this.loadingText = '已加载全部';
 							return false;
+						}else if(res.data.data.list.length <3){
+							uni.hideNavigationBarLoading();
+							this.loadingText = '';
 						}
 						uni.hideNavigationBarLoading();
 						// this.orderList = res.data.data.list
@@ -211,26 +202,14 @@
 			scroll: function(e) {
 				this.oldScrollLeft = e.detail.scrollLeft
 			},
-			onShowDatePicker(type) { //显示
-				this.type = type;
-				this.showPicker = true;
-				this.datevalue = this[type];
-			},
 			onSelected(date) { //选择
-				console.log(date.fmt1)
+				console.log(date.target.value)
 				// this.type = type;
-				this.datevalue =date.fmt1;
+				this.datevalue = date.target.value;
 				this.page = 1;
 				this.orderList = [];
 				this.getorderListdata(this.tabCurrentIndex + 1, this.datevalue)
-				// if (e) {
-				// 	this[this.type] = parseTime(e.value);
-				// 	//选择的值
-				// 	// console.log('value => ' + e.value);
-				// 	// this.value = this[this.type]
-				// 	console.log(this.value)
-				// 	this.getorderListdata(this.tabCurrentIndex + 1, this.value)
-				// }
+
 			},
 			enterorder(orderId, type, text) {
 				uni.showModal({
@@ -272,10 +251,10 @@
 					title: '触底开始加载',
 					icon: 'success',
 				})
-				// if (this.loadingText != '' && this.loadingText != '已加载全部') {
-				// 	console.log('return')
-				// 	return false;
-				// }
+				if (this.loadingText != '' && this.loadingText != '已加载全部') {
+					console.log('return')
+					return false;
+				}
 				uni.showNavigationBarLoading();
 				this.getorderListdata(this.tabCurrentIndex + 1, this.datevalue)
 			},
@@ -373,6 +352,8 @@
 
 	.van-cell {
 		margin-top: 0;
+		line-height: 46px;
+		align-items: center;
 		padding-top: 0;
 		padding-bottom: 0;
 	}
