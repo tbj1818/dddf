@@ -26,23 +26,24 @@
 					<view class="moneyshow">
 						<view class="c-white fs14">我的余额</view>
 						<view class="c-yellow fs22">￥{{balance}}</view>
+						<button class="star-box" style="width:60px;float: right;" type="primary" @click="linkmoneydetail">明细</button>
 					</view>
 				</view>
 				<view class="flex flex-wrap  flex-justify-around numthree padding grid">
 					<view class=" van-col van-col--6  pointer">
-						<h1>{{totalReceice}}</h1>
+						<h1>{{totalDay}}</h1>
 						<p class="font-13 padding">日单量</p>
 					</view>
 					<view class=" van-col van-col--6  pointer">
-						<h1>{{successRate}}</h1>
+						<h1>{{totalWaitDay}}</h1>
 						<p class="font-13 padding">日成功单</p>
 					</view>
 					<view class=" van-col van-col--6  pointer">
-						<h1>{{totalSuccess}}</h1>
+						<h1>{{totalWait}}</h1>
 						<p class="font-13 padding">待接单数</p>
 					</view>
 					<view class=" van-col van-col--6  pointer">
-						<h1>{{goingorder}}</h1>
+						<h1>{{totalDoing}}</h1>
 						<p class="font-13 padding">正在接单</p>
 					</view>
 				</view>
@@ -113,21 +114,14 @@
 				account: '',
 				inviteCode: '',
 				balance: '',
-				successRate: 0,
-				totalReceice:0,
-				totalSuccess: 0,
-				goingorder:0,
+				totalWaitDay: 0,
+				totalDay:0,
+				totalWait: 0,
+				totalDoing:0,
 				advertimg:'https://t8.baidu.com/it/u=3571592872,3353494284&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg'
 			};
 		},
 		onShow() {
-			try {
-				// console.log(uni.getStorageSync('accountInfo'))
-				console.log(uni.getStorageSync('inviteCode'))
-			} catch (e) {
-				console.log(2)
-				//TODO handle the exception
-			};
 			if (uni.getStorageSync('token')) {
 				this.loginFlag = true;
 				// this.account = uni.getStorageSync('accountInfo').account;
@@ -147,19 +141,18 @@
 					// console.log(res)
 					if (res.data.code == 0) {
 						this.loginFlag = true;
-						// uni.showToast({
-						// 	title: res.data.message,
-						// 	icon: 'success',
-						// });
+						
 						this.account = res.data.data.account
 						this.balance = res.data.data.balance
-						this.successRate = res.data.data.successRate
-						if (!this.successRate) {
-							this.successRate = 0
+						uni.setStorageSync('balance', this.balance);
+						// console.log(uni.getStorageSync('balance'))
+						this.totalWaitDay = res.data.data.totalWaitDay
+						if (!this.totalWaitDay) {
+							this.totalWaitDay = 0
 						}
-						this.totalReceice = res.data.data.totalReceice
-						this.totalSuccess = res.data.data.totalSuccess
-						this.goingorder=res.data.data.jding
+						this.totalDay = res.data.data.totalDay
+						this.totalWait = res.data.data.totalWait
+						this.totalDoing=res.data.data.totalDoing
 						// console.log(this.balance)
 					}
 				}).catch(res => {
@@ -175,6 +168,11 @@
 			linktask(val) {
 				uni.navigateTo({
 					url: '/pages/index/releaseTask?type=' + val+'&balance='+this.balance
+				});
+			},
+			linkmoneydetail() {
+				uni.navigateTo({
+					url: '/pages/index/moneydetail'
 				});
 			},
 
@@ -208,6 +206,7 @@
 							try {
 								uni.setStorageSync('accountInfo', userinfo);
 								uni.setStorageSync('token', '');
+								uni.setStorageSync('balance', '');
 							} catch (e) {
 								//TODO handle the exception
 							};

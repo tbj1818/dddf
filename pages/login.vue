@@ -27,7 +27,7 @@
 			<view class="uni-form-item uni-column" style="position: relative;">
 
 				<!-- <text class="text-xl">验证码：</text> -->
-				<view class="title"><i class="iconfont  icon-mima"></i>验证码</view>
+				<view class="title"><i class="iconfont  icon-mima"></i>图片验证码</view>
 				<input type="text" maxlength="4" v-model="imgCode" placeholder="请输入图片验证码"></input>
 				<view class="justify-end yzhmbtn" style="bottom: 0;">
 					<image :src="imgCodeSrc" @click="getImgPath()" mode="aspectFit" style="height: 65upx;width: 240upx;"></image>
@@ -45,10 +45,6 @@
 			<view class="uni-form-item uni-column">
 				<view class="title"><i class="iconfont icon-yaoqingmatianchong"></i>邀请码</view>
 				<input class="uni-input" v-model="yqmvalue" type="text" placeholder="请输入邀请码" />
-			</view>
-			<view class="uni-form-item uni-column">
-				<view class="title"><i class="iconfont icon-shangjia1"></i>商家</view>
-				<input class="uni-input" v-model="uservalue" type="text" placeholder="请输入商家" />
 			</view>
 			<button type="primary" class="uni-buttonlogin" @click="getreg">注册</button>
 		</view>
@@ -71,7 +67,6 @@
 				password: '',
 				imgCode: '',
 				yqmvalue: '',
-				uservalue: '',
 				btnnum: 0,
 				code: '',
 				imgCodeSrc: '',
@@ -232,6 +227,11 @@
 					});
 					return false
 				}
+				
+				var inviteCode = this.yqmvalue;
+				if(inviteCode == undefined || inviteCode == 'undefined'){
+					inviteCode = "";
+				}
 				// 请求后台注册接口
 				let regdata = {
 					phone: this.phone,
@@ -239,7 +239,7 @@
 					timeFlag: '',
 					regFrom: 50,
 					mobileCaptcha: this.code,
-					inviteCode: this.yqmvalue,
+					inviteCode: inviteCode,
 					channel: '小米',
 					fromId:2,
 					logonPasswd: this.password

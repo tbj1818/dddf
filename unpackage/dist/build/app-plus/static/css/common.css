@@ -728,7 +728,7 @@ body {
 
 .tittop .tittle {
 	width: 100%;
-	font-size: 18px;
+	font-size:16px;
 	font-weight: bold;
 	text-align: left;
 	line-height: 40px;
@@ -1205,6 +1205,7 @@ body {
 	html {
 		font-size: 64px
 	}
+	.page_header{max-width: 640px; left: 50% !important; margin-left: -320px;}
 }
 
 blockquote,
@@ -2094,13 +2095,22 @@ a.pink {
 	margin-left: 0;
 }
 .nodata {
-	font-size: 1.5rem;
-	display: inline-block;
+	font-size:14px;
+	display: inline-block; text-align: center;
 	margin: 20px auto 0;
 	color: #999;
-	width: 100px;
-	height: 100px;
+	width: 100%;line-height: 50px;
 }
+.nodataorder {
+		width: 60%;
+		height: 100px;
+		margin: 10px 20%;
+		text-align: center;
+		display: inline-block;
+		background: url(@/static/images/nothing.png) no-repeat center center;
+		background-size: contain; opacity: .5;
+	}
+	.text-centernodata{text-align: center;width: 100%; color:#999; display: inline-block; line-height: 40px;}
 .van-divider {
 	margin: 0;
 }
@@ -2221,7 +2231,9 @@ uni-button:after {
 	height: 46px; flex: auto;
 	line-height: 46px;
 }
-
+.logokw{width:100px; height:100px;margin: 10px auto;box-shadow: 0 2px 4px 1px rgba(0,0,0,.08);background: url(@/static/images/logo.jpeg) no-repeat center center; background-size: cover; border-radius:15px;}
+.screenone{width:80px; height:80px;margin: 10px auto;box-shadow: 0 2px 4px 1px rgba(0,0,0,.08);background: url(@/static/images/qr-upload.jpg) no-repeat center center; background-size: cover; border-radius:15px;}
+.screentwo{width:80px; height:80px;margin: 10px auto;box-shadow: 0 2px 4px 1px rgba(0,0,0,.08);background: url(@/static/images/qr-photo.jpg) no-repeat center center; background-size: cover; border-radius:15px;}
 /* 输入框文字换行 */
 .uni-form-item {
 	    margin-bottom: 10px;

@@ -26,7 +26,7 @@
 			<view class="title">
 				<i class="van-icon van-icon-balance-list" style="font-size: 24px; vertical-align: middle;color: #666;"></i>交易号<text class="van-tag van-tag--round van-tag--primary margin marL10 fs14">手机版支付宝叫订单号，电脑版叫交易号</text>
 			</view>
-			<input class="uni-input" maxlength="11" v-model="transactionnum" type="number" placeholder="请输入交易号" />
+			<input class="uni-input" maxlength="11" v-model="transactionnum" type="text" placeholder="请输入交易号" />
 		</view>
 
 		<button type="primary" class="uni-buttonlogin orange-red-bg" @click="getdata">确认提交</button>

@@ -37,10 +37,10 @@
 			};
 		},
 		onLoad() {
-
+			this.getafficheList()
 		},
 		onShow() {
-			this.getafficheList()
+
 		},
 		components: {},
 		methods: {
@@ -95,7 +95,7 @@
 				// 允许从相机和相册扫码
 				uni.scanCode({
 					success: function(res) {
-						console.log('条码类型：' + res.scanType);
+						// console.log('条码类型：' + res.scanType);
 						console.log('条码内容：' + res.result);
 						// uni.showToast({
 						// 	icon: 'none',
@@ -123,12 +123,40 @@
 			uploadFile() {
 				uni.chooseImage({
 					count: 1, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
 					sourceType: ['album', 'camera'], //从相册选择
 					success: (res) => {
 						console.log(res)
 						this.filepath = res.tempFilePaths[0]
 						console.log(this.filepath)
+						console.log('压缩前图片体积', res.tempFiles[0].size);
+						uni.getImageInfo({
+							src: this.filepath,
+							success: function(image) {
+								let canvasWidth = image.width //图片原始长宽
+								let canvasHeight = image.height;
+								let base = canvasWidth / canvasHeight;
+								//设置画布最大宽度
+								if (canvasWidth > 800) {
+									canvasWidth = 800;
+									canvasHeight = Math.floor(canvasWidth / base);
+								}
+								let img = new Image();
+								img.src = this.filepath; // 要压缩的图片  
+								let canvas = document.createElement('canvas');
+								let ctx = canvas.getContext('2d');
+								canvas.width = canvasWidth;
+								canvas.height = canvasHeight;
+								// 清除画布
+								ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+								//  将图片画到canvas上面   使用Canvas压缩  
+								ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
+								// canvas.toDataURL 返回的是一串Base64编码的URL
+								// 指定格式 PNG  
+								this.filepath = canvas.toDataURL("image/png");
+								console.log('压缩后图片转换成base64'+this.filepath)
+							},
+						})
 						uni.showLoading({
 							title: '加载中'
 						});
@@ -171,7 +199,7 @@
 					util.navigateToPath(path)
 				}
 			},
-			
+
 		}
 	};
 </script>
@@ -196,13 +224,15 @@
 	}
 
 	.flotage {
-		position: fixed; background: #388add;
-		right:0; color: #FFF;
-		bottom:20%;
-		border-radius:10px 0 0 10px;
+		position: fixed;
+		background: #388add;
+		right: 0;
+		color: #FFF;
+		bottom: 20%;
+		border-radius: 10px 0 0 10px;
 		text-align: center;
 		z-index: 99;
-		font-size:16px;
+		font-size: 16px;
 		width: 24px !important;
 		padding: 12px 0px;
 	}

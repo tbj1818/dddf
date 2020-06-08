@@ -77,6 +77,14 @@
 			"path": "pages/index/rechargeHistory",
 			"style": {
 				"navigationBarTitleText": "充值历史"
+				// "enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/index/moneydetail",
+			"style": {
+				"navigationBarTitleText": "余额明细",
+				"enablePullDownRefresh": true
 			}
 		},
 		{

@@ -36,7 +36,7 @@
 							<view class="van-col van-col--12">辅助对象：{{item.helpObj}}</view>
 							<view class="van-col van-col--12" v-if="item.isFix==1" style="text-align: right;">是否定向：是</view>
 							<view class="van-col van-col--12" v-if="item.isFix==0" style="text-align: right;">是否定向：否</view>
-							<view class="van-col van-col--12">省份：{{item.chooseAreaName}}</view>
+							<view class="van-col van-col--12" v-if="item.isFix==1">省份：{{item.chooseAreaName}}</view>
 						</view>
 						<li></li>
 						<li></li>
@@ -138,10 +138,13 @@
 				console.log('start pulldown');
 			}, 1000);
 			uni.startPullDownRefresh();
-			this.getorderListdata(this.tabCurrentIndex + 1, this.datevalue)
+			// this.getorderListdata(this.tabCurrentIndex + 1, this.datevalue)
 		},
 		// 下拉刷新
 		onPullDownRefresh() {
+			this.page = 1;
+			this.orderList = [];
+			this.getorderListdata(this.tabCurrentIndex + 1, this.datevalue)
 			uni.showToast({
 				title: '刷新成功',
 				icon: 'success',
@@ -177,18 +180,18 @@
 							title: res.data.message,
 							icon: 'success',
 						});
-
-						this.page++;
+						
 						this.orderList.push(...res.data.data.list);
 						if (res.data.data.list.length == 0) {
 							// console.log('已加载全部')
 							uni.hideNavigationBarLoading();
 							this.loadingText = '已加载全部';
 							return false;
-						}else if(res.data.data.list.length <3){
+						}else if(res.data.data.list.length <10){
 							uni.hideNavigationBarLoading();
-							this.loadingText = '';
+							this.loadingText = '已加载全部';
 						}
+							this.page++;
 						uni.hideNavigationBarLoading();
 						// this.orderList = res.data.data.list
 					}
@@ -227,7 +230,9 @@
 										title: res.data.message,
 										icon: 'success',
 									});
-
+									this.page=1;
+									this.orderList = [];
+									this.getorderListdata(this.tabCurrentIndex + 1, this.datevalue)	
 								}
 							}).catch(res => {
 								uni.showToast({
@@ -248,10 +253,10 @@
 			getmorenews: function() {
 				console.log('已触底')
 				uni.showToast({
-					title: '触底开始加载',
+					title: '已触底',
 					icon: 'success',
 				})
-				if (this.loadingText != '' && this.loadingText != '已加载全部') {
+				if (this.loadingText == '已加载全部') {
 					console.log('return')
 					return false;
 				}
