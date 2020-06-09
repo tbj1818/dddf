@@ -882,6 +882,7 @@ body {
 .center-container .content .top {
 	padding: 15px;
 	background: -webkit-gradient(linear, 0 0, 100% 0, from(#ff9924), to(#fe5300));
+	background: #ff9924;
 	border-radius: 8px 8px 0 0;
 	display: flex;
 	align-items: center;
@@ -2132,7 +2133,7 @@ a.pink {
 }
 
 .page {
-	padding: 10px;
+	padding: 10px;font-size: 14px;
 	text-align: left;
 }
 

@@ -1,7 +1,6 @@
 <template>
 	<view class="page">
 		<view class="wrapper center-container">
-
 			<view class="content">
 				<view class="top">
 					<view class="flex ">
@@ -35,7 +34,7 @@
 						<p class="font-13 padding">日单量</p>
 					</view>
 					<view class=" van-col van-col--6  pointer">
-						<h1>{{totalWaitDay}}</h1>
+						<h1>{{totalSuccessDay}}</h1>
 						<p class="font-13 padding">日成功单</p>
 					</view>
 					<view class=" van-col van-col--6  pointer">
@@ -98,7 +97,7 @@
 			</view>
 			<!-- <button >打开弹窗</button> -->
 			<uni-popup ref="popup" type="center">
-				<view class="dialogText">全新PC客户端，体验从未有过的真实游戏世界</view>
+				<view class="dialogText">推荐好友注册并下单，返平台利润的10%-50%！</view>
 			</uni-popup>
 		</view>
 	</view>
@@ -114,11 +113,10 @@
 				account: '',
 				inviteCode: '',
 				balance: '',
-				totalWaitDay: 0,
+				totalSuccessDay: 0,
 				totalDay:0,
 				totalWait: 0,
 				totalDoing:0,
-				advertimg:'https://t8.baidu.com/it/u=3571592872,3353494284&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg'
 			};
 		},
 		onShow() {
@@ -146,9 +144,9 @@
 						this.balance = res.data.data.balance
 						uni.setStorageSync('balance', this.balance);
 						// console.log(uni.getStorageSync('balance'))
-						this.totalWaitDay = res.data.data.totalWaitDay
-						if (!this.totalWaitDay) {
-							this.totalWaitDay = 0
+						this.totalSuccessDay = res.data.data.totalSuccessDay
+						if (!this.totalSuccessDay) {
+							this.totalSuccessDay = 0
 						}
 						this.totalDay = res.data.data.totalDay
 						this.totalWait = res.data.data.totalWait
@@ -222,7 +220,6 @@
 	.van-col--12 {
 		align-self: center;
 	}
-
 	.numthree h1 {
 		font-size: 22px;
 		text-align: center;
@@ -232,26 +229,22 @@
 	.numthree p {
 		text-align: center;
 	}
-
 	.van-hairline--top-bottom .van-icon {
 		padding: 0 10px;
 		font-size: 20px;
 		color: #999;
 	}
-
 	.center-container .content .top .avatar {
 		width: 68px;
 		height: 68px;
 		margin-right: 10px;
 		border-radius: 100%
 	}
-
 	.moneyshow {
 		width:120px;
 		text-align: right;
 		line-height: 26px;
 	}
-
 	.dialogText {
 		width: 80%;
 		line-height: 32px;
@@ -259,7 +252,6 @@
 		padding: 20px;
 		border-radius: 10px;
 	}
-
 	.center-container .content .top .star-box {
 		text-align: center;
 		line-height: 18px;
@@ -268,15 +260,12 @@
 		color: #fe6a03;
 		padding: 1px 2px
 	}
-
 	.tgText {
 		text-align: left;
 	}
-
 	.center-container .content .cells .van-cell {
 		align-items: center
 	}
-
 	.van-cell {
 		padding: 10px 0;
 	}

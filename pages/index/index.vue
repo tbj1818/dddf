@@ -95,22 +95,18 @@
 				// 允许从相机和相册扫码
 				uni.scanCode({
 					success: function(res) {
-						// console.log('条码类型：' + res.scanType);
 						console.log('条码内容：' + res.result);
-						// uni.showToast({
-						// 	icon: 'none',
-						// 	title: res.result
-						// });
-						if (res.result.indexOf("http://") == -1 || res.result.indexOf("https://") == -1) {
+						if (res.result.substr(0,7).toLowerCase() == "http://" || res.result.substr(0,8).toLowerCase() == "https://") {
+							uni.navigateTo({
+								url: '/pages/index/releaseTask?qucodeurl=' + encodeURIComponent(res.result) + '&type=1',
+							})
+						}else{
 							uni.showToast({
 								icon: 'none',
 								title: '未解析出地址，请重新扫码或上传'
 							});
 							return false
 						}
-						uni.navigateTo({
-							url: '/pages/index/releaseTask?qucodeurl=' + encodeURIComponent(res.result) + '&type=1',
-						})
 					},
 					fail(res) {
 						uni.showToast({

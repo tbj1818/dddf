@@ -1,14 +1,17 @@
 <template>
 	<view class="page">
-		<view  class="listemes list" v-for="(item,index) in rechargehisyoryList">
+		<view class="listemes list" v-for="(item,index) in rechargehisyoryList">
 			<view class="content noborder">
 				<view class="tittop noborder">
 					<p class="tittle_fs16">{{item.tradeTypeName}}</p>
-					<p class="emesremark lineb"><em>充值时间：{{item.createTime}}</em></p>
-							<p class="c-orange lineb">资金余额：￥{{item.tradeMoneyAfter}}</p>
+					<p class="emesremark lineb"><em>时间：{{item.createTime}}</em></p>
+					<!-- <p class="c-orange lineb">变动后：￥{{item.tradeMoneyAfter}}</p> -->
 				</view>
 			</view>
-			<view  class="moneydetailstip">+{{item.tradeMoney}}</view>
+			<view class="moneydetailstip">
+				<text v-if="item.inOutFlag==0" class="c-green">+{{item.tradeMoney}}</text>
+				<text v-if="item.inOutFlag==1"  class="c-red">-{{item.tradeMoney}}</text>
+			</view>
 		</view>
 		<view class="loading">{{loadingText}}</view>
 		<view v-if="rechargehisyoryList.length==0">
@@ -30,7 +33,7 @@
 		data() {
 			return {
 				rechargehisyoryList: [],
-				page:1,
+				page: 1,
 				loadingText: '加载中...'
 			};
 		},
@@ -40,8 +43,7 @@
 			}, 1000);
 			uni.startPullDownRefresh();
 		},
-		onShow() {
-		},
+		onShow() {},
 		// 下拉刷新
 		onPullDownRefresh() {
 			this.getDetail()
@@ -60,11 +62,11 @@
 		},
 		methods: {
 			getDetail() {
-				
-				let data={
-					fromType:2,
-					limit:10,
-					offset:this.page
+
+				let data = {
+					fromType: 2,
+					limit: 10,
+					offset: this.page
 				}
 				util.sendPost('/appMoneyFlowDetail/getDetail', data).then((res) => {
 					console.log(res)
@@ -79,7 +81,7 @@
 							uni.hideNavigationBarLoading();
 							this.loadingText = '已加载全部';
 							return false;
-						}else if(res.data.data.folwList.length <3){
+						} else if (res.data.data.folwList.length < 3) {
 							uni.hideNavigationBarLoading();
 							this.loadingText = '';
 						}
@@ -99,6 +101,7 @@
 	.uni-steps__row-text {
 		padding: 0 10px;
 	}
+
 	.uni-steps__row-circle {
 		width: 10px;
 		height: 10px;
@@ -119,7 +122,7 @@
 	}
 
 	.lineb {
-		line-height:auto;
+		line-height: auto;
 	}
 
 	.noborder {
@@ -129,11 +132,23 @@
 	.listemes {
 		width: 95%;
 	}
+
 	.loading {
 		text-align: center;
 		line-height: 60px;
 		color: #000
 	}
-	.tittle_fs16{font-size: 16px; line-height: 32px;}
-	.moneydetailstip{position: absolute;right: 20px; top: 10px; color: red; font-size: 18px;}
+
+	.tittle_fs16 {
+		font-size: 16px;
+		line-height: 32px;
+	}
+
+	.moneydetailstip {
+		position: absolute;
+		right: 20px;
+		top: 10px;
+		color: red;
+		font-size: 18px;
+	}
 </style>

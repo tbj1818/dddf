@@ -27,11 +27,14 @@
 				<view class="content">
 					<view class="tittop">
 						<view class="tittle">{{item.state}}订单：{{item.orderNo}}</view>
-						<view class="emesremark c-grey flex"><em>注册手机号:{{item.studioName}}</em><em class="c-orange">价格:￥{{item.taskPrice}}</em></view>
+						<!-- <view class="emesremark c-grey flex"><em>注册手机号:{{item.studioName}}</em><em class="c-orange">价格:￥{{item.taskPrice}}</em></view> -->
+						<view class="emesremark c-grey flex">
+							<em>下单时间:{{item.createTime}}</em>
+						<em class="c-orange fs16">价格:￥{{item.taskPrice}}</em></view>
 					</view>
 					<ul class="emeslistmark">
-						<li class="flex"> 下单时间：{{item.createTime}} </li>
-						<li class="flex"> 手续费：<em class="c-orange">(￥{{item.feePrice}})</em></li>
+						<!-- <li class="flex"> 下单时间：{{item.createTime}} </li> -->
+						<!-- <li class="flex"> 手续费：<em class="c-orange">(￥{{item.feePrice}})</em></li> -->
 						<view class="van-row">
 							<view class="van-col van-col--12">辅助对象：{{item.helpObj}}</view>
 							<view class="van-col van-col--12" v-if="item.isFix==1" style="text-align: right;">是否定向：是</view>
@@ -341,12 +344,12 @@
 	}
 
 	.list {
-		padding-bottom: 60px;
-		padding-top: 90px;
+		padding-bottom: var(--window-bottom);
+		padding-top:80px;
 	}
 
 	.listemes {
-		width: 95%;
+		width: 95%;margin: 15px auto;
 	}
 
 	.uni-swiper-msg {

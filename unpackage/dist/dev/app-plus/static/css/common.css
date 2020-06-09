@@ -2231,7 +2231,7 @@ uni-button:after {
 	height: 46px; flex: auto;
 	line-height: 46px;
 }
-.logokw{width:100px; height:100px;margin: 10px auto;box-shadow: 0 2px 4px 1px rgba(0,0,0,.08);background: url(@/static/images/logo.jpeg) no-repeat center center; background-size: cover; border-radius:15px;}
+.logokw{width:100px; height:100px;margin: 10px auto;box-shadow: 0 2px 4px 1px rgba(0,0,0,.08);background: url(@/static/images/logo.png) no-repeat center center; background-size: cover; border-radius:15px;}
 .screenone{width:80px; height:80px;margin: 10px auto;box-shadow: 0 2px 4px 1px rgba(0,0,0,.08);background: url(@/static/images/qr-upload.jpg) no-repeat center center; background-size: cover; border-radius:15px;}
 .screentwo{width:80px; height:80px;margin: 10px auto;box-shadow: 0 2px 4px 1px rgba(0,0,0,.08);background: url(@/static/images/qr-photo.jpg) no-repeat center center; background-size: cover; border-radius:15px;}
 /* 输入框文字换行 */
