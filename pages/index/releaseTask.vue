@@ -44,7 +44,7 @@
 				<view class="title"><i class="van-icon van-icon-qr"></i>二维码地址</view>
 				<input class="uni-input" v-model="qrcodeAdress" type="text" placeholder="请输入地址" />
 			</view>
-			<button type="primary" class="uni-buttonlogin orange-red-bg" @click="getdata">发布任务</button>
+			<button type="primary" :disabled="senddata" class="uni-buttonlogin orange-red-bg" @click="getdata">发布任务</button>
 		</view>
 	</view>
 </template>
@@ -60,7 +60,7 @@
 				ratedata: '',
 				type: '',
 				isFix: 1,
-				chooseAreaId: '',
+				chooseAreaId: -1,
 				chooseAreaName: '',
 				helpObj: '',
 				data: {
@@ -69,6 +69,7 @@
 				industryList: [],
 				percent: 0,
 				rateValue: 0,
+				senddata: false,
 				changeimg: '', // 更改后的头像
 			};
 		},
@@ -77,9 +78,10 @@
 		},
 		onLoad: function(option) { //option为object类型，会序列化上个页面传递的参数
 			// console.log(option.type); //打印出上个页面传递的参数。
+			uni.hideLoading()
 			this.type = option.type
 			this.moneyValue = uni.getStorageSync('balance');
-			this.qrcodeAdress=decodeURIComponent(option.qucodeurl)
+			this.qrcodeAdress = decodeURIComponent(option.qucodeurl)
 			this.getmatchNeedDcit()
 		},
 		watch: {
@@ -103,12 +105,18 @@
 				this.data[val] = e.target.value
 				this.chooseAreaId = this.industryList[e.target.value].value
 				this.chooseAreaName = this.industryList[e.target.value].label
+				console.log(this.chooseAreaId)
 			},
 			getmatchNeedDcit() {
 				util.sendPost('/appBaseType/matchNeedDcit', '').then((res) => {
 					// console.log(res)
 					if (res.data.code == 0) {
 						this.industryList = res.data.data.region
+						this.industryList.unshift({
+							label: "请选择",
+							value: -1
+						})
+						console.log(this.industryList)
 					}
 				}).catch(res => {
 					uni.showToast({
@@ -120,16 +128,16 @@
 			toSubPage(path) {
 				util.navigateToPath(path)
 			},
-			uploadPic: function() {
-				uni.chooseImage({
-					success: (res) => {
-						const tempFilePaths = res.tempFilePaths;
-						this.changeimg = tempFilePaths[0]
-						// 调用图片上传接口
-						
-					}
-				});
-			},
+			// uploadPic: function() {
+			// 	uni.chooseImage({
+			// 		success: (res) => {
+			// 			const tempFilePaths = res.tempFilePaths;
+			// 			this.changeimg = tempFilePaths[0]
+			// 			// 调用图片上传接口
+
+			// 		}
+			// 	});
+			// },
 			rateValuedata(e) {
 				console.log(e)
 				this.rateValue = e.detail.value
@@ -142,6 +150,7 @@
 				console.log(this.rateValue)
 			},
 			getdata() {
+				console.log(this.chooseAreaId)
 				if (!this.ratedata) {
 					uni.showToast({
 						title: '请输入佣金',
@@ -155,18 +164,18 @@
 					})
 					return false
 				} else if (this.isFix) {
-					if (this.chooseAreaId == 0) {
+					if (this.chooseAreaId == -1) {
 						uni.showToast({
 							title: '请选择地区',
 							icon: 'none',
 						})
 						return false
 					}
-					
 				}
+				this.senddata = true
 				let rechargeinfo = {
 					taskPrice: this.rateValue,
-					isFix:this.isFix,
+					isFix: this.isFix,
 					chooseAreaId: this.chooseAreaId,
 					chooseAreaName: this.chooseAreaName,
 					qrcodeUrl: this.qrcodeAdress,
@@ -182,6 +191,7 @@
 							duration: 2000
 						})
 						setTimeout(function() {
+							this.senddata = false
 							uni.switchTab({
 								url: '/pages/index/my'
 							});
@@ -198,7 +208,13 @@
 	};
 </script>
 <style scoped>
-	.moneyLine{line-height: 46px; font-size: 18px; color: red; font-weight:bold;}
+	.moneyLine {
+		line-height: 46px;
+		font-size: 18px;
+		color: red;
+		font-weight: bold;
+	}
+
 	.van-col--12 {
 		align-self: center;
 	}
@@ -216,7 +232,8 @@
 	}
 
 	.uploadBtn {
-		width: 100px; margin: 20px 0;
+		width: 100px;
+		margin: 20px 0;
 		height: 40px;
 		line-height: 40px
 	}
@@ -229,6 +246,7 @@
 		color: #fe6a03;
 		padding: 1px 2px
 	}
+
 	.center-container .content .cells .van-cell {
 		align-items: center
 	}
@@ -239,10 +257,16 @@
 
 	.headimgsize {
 		width: 100px;
-		height: 100px; border:1px dashed #dcdcdc; line-height: 100px;
+		height: 100px;
+		border: 1px dashed #dcdcdc;
+		line-height: 100px;
 		margin: 10px 20px
 	}
-	.rightselect{flex-basis:130px;}
+
+	.rightselect {
+		flex-basis: 130px;
+	}
+
 	.ratewidth {
 		height: 10px;
 		width: 150px;

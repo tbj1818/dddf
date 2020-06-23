@@ -116,6 +116,12 @@
 			"style": {
 				"navigationBarTitleText": "个人中心"
 			}
+		},
+		{
+			"path": "pages/index/shensu",
+			"style": {
+				"navigationBarTitleText": "申诉"
+			}
 		}
 	],
 	"globalStyle": {

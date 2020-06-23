@@ -9,9 +9,10 @@
 				</view>
 				<view class="invitelink">
 					<image class="padding-top-xl margin-top-sm" style="height:200upx;" :src="qrcode" mode="aspectFit"></image>
-					<p>
+					<!-- <img id="qrCodeIco" src="../../static/images/logo.png" /> -->
+					<!-- <p>
 						<view class="fs16"> 您的推广注册链接</view>{{spread_url}}
-					</p>
+					</p> -->
 					<!--  #ifdef APP-PLUS -->
 					<!-- <button type="primary" @click="paste(spread_url)" class="orange-red-bg">复制</button> -->
 					<!--  #endif  -->
@@ -20,11 +21,9 @@
 					v-clipboard:success="(type) => onCopyResult('success')"
 					v-clipboard:error="(type) => onCopyResult('error')" class="orange-red-bg">复制</button> -->
 					<!--  #endif  -->
-					<button type="primary" class="orange-red-bg cu-btn bg-gradual-blue" @click="copyPath('', spread_url)"
-					 v-clipboard:copy="spread_url" v-clipboard:success="(type) => copyPath('success')" v-clipboard:error="(type) => copyPath('error')">点击复制推广链接</button>
-
 				</view>
-
+				<button type="primary" class="orange-red-bg cu-btn bg-gradual-blue" @click="copyPath('', spread_url)"
+				 v-clipboard:copy="spread_url" v-clipboard:success="(type) => copyPath('success')" v-clipboard:error="(type) => copyPath('error')">点击复制推广链接</button>
 			</view>
 		</view>
 	</view>
@@ -46,17 +45,17 @@
 		},
 		onShow() {
 			var that = this;
-			that.spread_url=that.inviteUrl+'/studio/#/pages/login?code='+that.inviteCode
+			that.spread_url = that.inviteUrl + '/studio/#/pages/login?code=' + that.inviteCode
 			// 获取屏幕高度
 			uni.getSystemInfo({
 				success(res) {
 					that.windowHeight = res.windowHeight;
 				}
 			})
-			
+
 			// 生成二维码
-			that.qrcode = QR.createQrCodeImg(that.spread_url, {  
-			     size: parseInt(200)//二维码大小  
+			that.qrcode = QR.createQrCodeImg(that.spread_url, {
+				size: parseInt(150) //二维码大小  
 			})
 		},
 		onLoad() {
@@ -66,7 +65,7 @@
 		},
 		methods: {
 			copyPath(type, text) {
-				this.spread_url=this.inviteUrl+'/studio/#/pages/login?code='+this.inviteCode
+				this.spread_url = this.inviteUrl + '/studio/#/pages/login?code=' + this.inviteCode
 				// #ifdef APP-PLUS
 				uni.setClipboardData({
 					data: this.spread_url,
@@ -90,7 +89,7 @@
 				}
 				// #endif
 			}
-			
+
 		}
 	};
 </script>
@@ -113,7 +112,7 @@
 	}
 
 	.titleH1 {
-		font-size: 20px;
+		font-size: 18px;
 		line-height: 30px;
 		font-weight: bold;
 		color: #FF0;
@@ -137,12 +136,14 @@
 		width: 90%;
 		text-align: center;
 		position: absolute;
-		bottom:5px;
-		left:5%;
+		bottom: 5px;
+		left: 5%;
 	}
 
 	.invitelink {
-		width: 90%; margin: 0 auto;
+		width: 90%;
+		margin: 0 auto;
+		position: relative;
 		text-align: center;
 		font-size: 18px;
 
@@ -153,10 +154,21 @@
 		width: 100%;
 	}
 
-	.invitelink .orange-red-bg {
+	.orange-red-bg {
 		width: 160px;
+		font-size: 14px;
 		height: 36px;
 		line-height: 36px;
 		margin: 10px auto;
+	}
+
+	#qrCodeIco {
+		position: absolute;
+		width: 40px;
+		height: 40px;
+		top: 50;
+		left: 50%;
+		top: 50%;
+		margin: -20px 0 0 -20px;
 	}
 </style>

@@ -30,16 +30,16 @@
 						<!-- <view class="emesremark c-grey flex"><em>注册手机号:{{item.studioName}}</em><em class="c-orange">价格:￥{{item.taskPrice}}</em></view> -->
 						<view class="emesremark c-grey flex">
 							<em>下单时间:{{item.createTime}}</em>
-						<em class="c-orange fs16">价格:￥{{item.taskPrice}}</em></view>
+							<em class="c-orange fs16">价格:￥{{item.taskPrice}}</em></view>
 					</view>
 					<ul class="emeslistmark">
 						<!-- <li class="flex"> 下单时间：{{item.createTime}} </li> -->
 						<!-- <li class="flex"> 手续费：<em class="c-orange">(￥{{item.feePrice}})</em></li> -->
 						<view class="van-row">
-							<view class="van-col van-col--12">辅助对象：{{item.helpObj}}</view>
-							<view class="van-col van-col--12" v-if="item.isFix==1" style="text-align: right;">是否定向：是</view>
-							<view class="van-col van-col--12" v-if="item.isFix==0" style="text-align: right;">是否定向：否</view>
-							<view class="van-col van-col--12" v-if="item.isFix==1">省份：{{item.chooseAreaName}}</view>
+							<view class="van-col van-col--16">辅助对象：{{item.helpObj}}</view>
+							<view class="van-col van-col--8" v-if="item.isFix==1" style="text-align: right;">是否定向：是</view>
+							<view class="van-col van-col--8" v-if="item.isFix==0" style="text-align: right;">是否定向：否</view>
+							<view class="van-col van-col--24" v-if="item.isFix==1">省份：{{item.chooseAreaName}}</view>
 						</view>
 						<li></li>
 						<li></li>
@@ -60,16 +60,21 @@
 						<view class="van-col van-col--12 textCenter" @click="enterorder(item.rowId,20,'失败')">失败</view>
 					</view>
 				</view>
-			</view>
+				<view class="checkstate" v-if="item.orderState==4">
+					<view class="van-row">
+						<view class="van-col van-col--24 textCenter" @click="uploadImg(item.rowId)">{{item.discussImgByStudio.length > 0 ? '重新上传图片' : '上传图片'}}</view>
+					</view>
+				</view>
+	
+			
+		</view>
 			<view class="loading">{{loadingText}}</view>
-			<view v-if="orderList.length==0">
+			<view v-if="orderList.length<1">
 				<text class="nodataorder">
 				</text>
 				<text class="text-centernodata">暂无数据</text>
 			</view>
 			<ReturnTop></ReturnTop>
-		</view>
-
 	</view>
 	</view>
 </template>
@@ -163,7 +168,7 @@
 		methods: {
 			//顶部tab点击
 			tabClick(index) {
-				console.log(this.datevalue)
+				// console.log(this.datevalue)
 				this.page = 1;
 				this.tabCurrentIndex = index;
 				this.orderList = [];
@@ -177,24 +182,24 @@
 					offset: this.page
 				}
 				util.sendPost('/appOrder/studioOrderList', infodata).then((res) => {
-					console.log(res)
+					// console.log(res)
 					if (res.data.code == 0) {
 						uni.showToast({
 							title: res.data.message,
 							icon: 'success',
 						});
-						
+
 						this.orderList.push(...res.data.data.list);
 						if (res.data.data.list.length == 0) {
 							// console.log('已加载全部')
 							uni.hideNavigationBarLoading();
 							this.loadingText = '已加载全部';
 							return false;
-						}else if(res.data.data.list.length <10){
+						} else if (res.data.data.list.length < 10) {
 							uni.hideNavigationBarLoading();
 							this.loadingText = '已加载全部';
 						}
-							this.page++;
+						this.page++;
 						uni.hideNavigationBarLoading();
 						// this.orderList = res.data.data.list
 					}
@@ -209,7 +214,7 @@
 				this.oldScrollLeft = e.detail.scrollLeft
 			},
 			onSelected(date) { //选择
-				console.log(date.target.value)
+				// console.log(date.target.value)
 				// this.type = type;
 				this.datevalue = date.target.value;
 				this.page = 1;
@@ -233,9 +238,9 @@
 										title: res.data.message,
 										icon: 'success',
 									});
-									this.page=1;
+									this.page = 1;
 									this.orderList = [];
-									this.getorderListdata(this.tabCurrentIndex + 1, this.datevalue)	
+									this.getorderListdata(this.tabCurrentIndex + 1, this.datevalue)
 								}
 							}).catch(res => {
 								uni.showToast({
@@ -254,18 +259,87 @@
 			},
 			// 如果列表滚动到底部将会立即触发这个事件重置 loadmore
 			getmorenews: function() {
-				console.log('已触底')
+				// console.log('已触底')
 				uni.showToast({
 					title: '已触底',
 					icon: 'success',
 				})
 				if (this.loadingText == '已加载全部') {
-					console.log('return')
+					// console.log('return')
 					return false;
 				}
 				uni.showNavigationBarLoading();
 				this.getorderListdata(this.tabCurrentIndex + 1, this.datevalue)
 			},
+			uploadImg(orderId){
+				uni.chooseImage({
+					count: 1, //默认9
+					sizeType: ['compressed'], //可以指定是原图还是压缩图，默认二者都有
+					sourceType: ['album', 'camera'], //从相册选择
+					success: (res) => {
+						this.filepath = res.tempFilePaths[0]
+						// console.log('压缩前图片体积', res.tempFiles[0].size);
+						uni.getImageInfo({
+							src: this.filepath,
+							success: function(image) {
+								let canvasWidth = image.width //图片原始长宽
+								let canvasHeight = image.height;
+								let base = canvasWidth / canvasHeight;
+								//设置画布最大宽度
+								if (canvasWidth > 800) {
+									canvasWidth = 800;
+									canvasHeight = Math.floor(canvasWidth / base);
+								}
+								let img = new Image();
+								img.src = this.filepath; // 要压缩的图片  
+								let canvas = document.createElement('canvas');
+								let ctx = canvas.getContext('2d');
+								canvas.width = canvasWidth;
+								canvas.height = canvasHeight;
+								// 清除画布
+								ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+								//  将图片画到canvas上面   使用Canvas压缩  
+								ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
+								// canvas.toDataURL 返回的是一串Base64编码的URL
+								// 指定格式 PNG  
+								this.filepath = canvas.toDataURL("image/png");
+								// console.log('压缩后图片转换成base64'+this.filepath)
+							},
+						})
+						uni.showLoading({
+							title: '加载中'
+						});
+						var data = {
+							token: uni.getStorageSync('token'),
+							fileName: 'imageFile',
+							fromType: 2,
+							rowId: orderId,
+						}
+						uni.uploadFile({
+							url: util.baseUrl + '/appOrder/discussOrder',
+							filePath: this.filepath,
+							name: 'imageFile',
+							formData: data,
+							success: (res) => {
+								res = JSON.parse(res.data)
+								if (res.code == 0) {
+									uni.showToast({
+										title: '上传图片成功',
+										duration: 2000
+									});
+								} else {
+									uni.showToast({
+										title: res.message,
+										icon: 'none',
+										duration: 2000
+									});
+								}
+							}
+						});
+				
+					}
+				});
+			}
 		}
 	};
 </script>
@@ -345,11 +419,12 @@
 
 	.list {
 		padding-bottom: var(--window-bottom);
-		padding-top:80px;
+		padding-top: 80px;
 	}
 
 	.listemes {
-		width: 95%;margin: 15px auto;
+		width: 95%;
+		margin: 15px auto;
 	}
 
 	.uni-swiper-msg {

@@ -728,7 +728,7 @@ body {
 
 .tittop .tittle {
 	width: 100%;
-	font-size:16px;
+	font-size:15px;
 	font-weight: bold;
 	text-align: left;
 	line-height: 40px;
@@ -2223,7 +2223,6 @@ uni-button:after {
 .page .logo img {
 	margin: 10px auto;
 	width: 30%;
-	max-height: 120px;
 	border-radius: 10px;
 	box-shadow: 0 2px 5px 0 #f80;
 }

@@ -10,3 +10,8 @@ const app = new Vue({
 	...App
 })
 app.$mount()
+
+app.globalData = {
+	showPrice: false,
+	version: 100,
+}

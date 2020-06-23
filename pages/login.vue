@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-			<view class="logokw"></view>
+		<view class="logokw"></view>
 		<view class="end-title">
 			　<view @tap="change(0)" :class="{btna:btnnum == 0}">登录</view>
 			　<view @tap="change(1)" :class="{btna:btnnum == 1}">注册</view>
@@ -36,15 +36,19 @@
 			<view class="uni-form-item uni-column" style="position: relative;">
 				<view class="title"><i class="iconfont icon-mima"></i>验证码</view>
 				<input class="uni-input" maxlength="11" v-model="code" type="number" placeholder="请输入验证码" />
-				<button type="primary" class="yzhmbtn" @click="sendPhone">{{codeMsg}}</button>
+				<button type="primary" class="yzhmbtn" :disabled="disabled" @click="sendPhone">{{codeMsg}}</button>
 			</view>
 			<view class="uni-form-item uni-column">
 				<view class="title"><i class="iconfont icon-mima"></i>密码</view>
 				<input class="uni-input" v-model="password" type="password" placeholder="请输入密码" />
 			</view>
 			<view class="uni-form-item uni-column">
+				<view class="title"><i class="iconfont icon-mima"></i>确认密码</view>
+				<input class="uni-input" v-model="passwords" type="password" placeholder="请再次输入密码" />
+			</view>
+			<view class="uni-form-item uni-column">
 				<view class="title"><i class="iconfont icon-yaoqingmatianchong"></i>邀请码</view>
-				<input class="uni-input" v-model="yqmvalue" type="text" placeholder="请输入邀请码" />
+				<input class="uni-input" disabled="true" v-model="yqmvalue" type="text" placeholder="请输入邀请码" />
 			</view>
 			<button type="primary" class="uni-buttonlogin" @click="getreg">注册</button>
 		</view>
@@ -65,19 +69,24 @@
 			return {
 				phone: '',
 				password: '',
+				passwords: '',
 				imgCode: '',
 				yqmvalue: '',
 				btnnum: 0,
 				code: '',
+				disabled:false,
 				imgCodeSrc: '',
 				timeFlag: '',
 				codeMsg: '发送验证码',
-				logo:'https://t8.baidu.com/it/u=3571592872,3353494284&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg'
+				logo: 'https://t8.baidu.com/it/u=3571592872,3353494284&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg'
 			};
 		},
 		onLoad: function(option) {
 			this.getImgPath();
-			this.yqmvalue=option.code
+			this.yqmvalue = option.code
+			if (this.yqmvalue) {
+				this.btnnum = 1
+			}
 		},
 		methods: {
 			getImgPath() { //图形验证码
@@ -113,7 +122,7 @@
 					regFrom: 50,
 					version: '1.0.0',
 					channel: '小米',
-					fromId:2,
+					fromId: 2,
 					logonPasswd: this.password
 				}
 				util.sendPost('/appLogin/smsLoginV1', data).then(function(res) {
@@ -122,7 +131,7 @@
 						const userinfo = {
 							token: res.data.data.token,
 							account: res.data.data.userAccount,
-							photo:res.data.data.photo,
+							photo: res.data.data.photo,
 							inviteCode: res.data.data.inviteCode,
 						}
 						try {
@@ -151,6 +160,7 @@
 				})
 			},
 			sendPhone() {
+				 let self = this
 				if (this.codeMsg != '发送验证码') {
 					uni.showToast({
 						title: '请稍后再发送验证码',
@@ -167,34 +177,39 @@
 						icon: 'none',
 					});
 				} else {
+					
 					let smsdata = {
 						userPhone: this.phone,
 						modelType: 100,
 						captcha: this.imgCode,
 						timeFlag: this.timeFlag,
-
 					}
 					util.sendPost('/sms/sendCaptchaSms', smsdata).then(function(res) {
 						console.log(res)
 						if (res.data.code == 0) {
+							 self.disabled = true;
 							let time = 60
 							console.log(time)
-							this.timer = setInterval(() => {
+
+							var timer = setInterval(() => {
 								if (time <= 1) {
-									this.codeMsg = '发送验证码'
-									clearInterval(this.timer)
+									self.codeMsg = '发送验证码'
+									 self.disabled = false;  //倒计时结束能够重新点击发送的按钮 
+									clearInterval(timer)
 								} else {
+									console.log(self.codeMsg)
 									time--
-									this.codeMsg = '已发送（' + time + '）'
+									self.codeMsg = time + "s后重新发送"
+
+									// this.codeMsg = '已发送（' + time + '）'
 								}
 							}, 1000)
-							this.code = res.data
+						} else {
+							uni.showToast({
+								title: res.data.message,
+								icon: 'none',
+							});
 						}
-					}).catch(res => {
-						uni.showToast({
-							title: '请求失败',
-							icon: 'none',
-						});
 					})
 				}
 			},
@@ -226,10 +241,23 @@
 						icon: 'none',
 					});
 					return false
+				} else if (!this.passwords) {
+					uni.showToast({
+						title: '请再次输入密码',
+						icon: 'none',
+					});
+					return false
 				}
-				
+				if (this.password != this.passwords) {
+					uni.showToast({
+						title: '两次输入密码不一致',
+						icon: 'none',
+					});
+					return false
+				}
+
 				var inviteCode = this.yqmvalue;
-				if(inviteCode == undefined || inviteCode == 'undefined'){
+				if (inviteCode == undefined || inviteCode == 'undefined') {
 					inviteCode = "";
 				}
 				// 请求后台注册接口
@@ -241,7 +269,7 @@
 					mobileCaptcha: this.code,
 					inviteCode: inviteCode,
 					channel: '小米',
-					fromId:2,
+					fromId: 2,
 					logonPasswd: this.password
 				}
 				util.sendPost('/appLogin/phoneReg', regdata).then(function(res) {
@@ -250,6 +278,9 @@
 						uni.showToast({
 							title: res.data.message,
 							icon: 'success',
+						});
+						uni.navigateTo({
+							url: '/pages/login'
 						});
 					}
 				}).catch(res => {

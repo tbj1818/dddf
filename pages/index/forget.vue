@@ -17,7 +17,7 @@
 		</view>
 		<view class="uni-form-item uni-column" style="position: relative;">
 			<view class="title"><i class="iconfont icon-mima"></i>验证码</view>
-			<input class="uni-input" maxlength="11" v-model="code" type="number" placeholder="请输入短信验证码" />
+			<input class="uni-input" maxlength="11" v-model="code" :disabled="disabled" type="number" placeholder="请输入短信验证码" />
 			<button type="primary" class="yzhmbtn" @click="sendPhone">{{codeMsg}}</button>
 		</view>
 		<view class="uni-form-item uni-column">
@@ -44,6 +44,7 @@
 				password: '',
 				imgCode: '',
 				imgCodeSrc: '',
+				disabled:false,
 				timeFlag: '',
 				code: '',
 				yqmvalue: '',
@@ -131,6 +132,7 @@
 
 			},
 			sendPhone() {
+				 let self = this
 				if (this.codeMsg != '发送验证码') {
 					uni.showToast({
 						title: '请稍后再发送验证码',
@@ -147,34 +149,54 @@
 						icon: 'none',
 					});
 				} else {
+					self.disabled = true;
+					let time = 60
+					console.log(time)
+					var timer = setInterval(() => {
+						if (time <= 1) {
+							self.codeMsg = '发送验证码'
+							 self.disabled = false;  //倒计时结束能够重新点击发送的按钮 
+							clearInterval(timer)
+						} else {
+							console.log(self.codeMsg)
+							time--
+							self.codeMsg = time + "s后重新发送"
+					
+							// this.codeMsg = '已发送（' + time + '）'
+						}
+					}, 1000)
 					let smsdata = {
 						userPhone: this.phone,
-						modelType: 110,
+						modelType: 140,
 						captcha: this.imgCode,
 						timeFlag: this.timeFlag,
 					}
-					util.sendPost('/sms/sendCaptchaSms', smsdata).then(function(res) {
-						console.log(res)
-						if (res.data.code == 0) {
-							let time = 60
-							console.log(time)
-							this.timer = setInterval(() => {
-								if (time <= 1) {
-									this.codeMsg = '发送验证码'
-									clearInterval(this.timer)
-								} else {
-									time--
-									this.codeMsg = '已发送（' + time + '）'
-								}
-							}, 1000)
-							this.code = res.data
-						}
-					}).catch(res => {
-						uni.showToast({
-							title: '请求失败',
-							icon: 'none',
-						});
-					})
+					// util.sendPost('/sms/sendCaptchaSms', smsdata).then(function(res) {
+					// 	console.log(res)
+					// 	if (res.data.code == 0) {
+					// 		self.disabled = true;
+					// 		let time = 60
+					// 		console.log(time)
+					// 		var timer = setInterval(() => {
+					// 			if (time <= 1) {
+					// 				self.codeMsg = '发送验证码'
+					// 				 self.disabled = false;  //倒计时结束能够重新点击发送的按钮 
+					// 				clearInterval(timer)
+					// 			} else {
+					// 				console.log(self.codeMsg)
+					// 				time--
+					// 				self.codeMsg = time + "s后重新发送"
+							
+					// 				// this.codeMsg = '已发送（' + time + '）'
+					// 			}
+					// 		}, 1000)
+					// 	}else{
+					// 		uni.showToast({
+					// 			title: res.data.message,
+					// 			icon: 'none',
+					// 		});
+					// 	}
+					// })
 				}
 			},
 			change(e) {

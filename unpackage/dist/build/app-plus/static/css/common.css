@@ -728,7 +728,7 @@ body {
 
 .tittop .tittle {
 	width: 100%;
-	font-size:16px;
+	font-size:15px;
 	font-weight: bold;
 	text-align: left;
 	line-height: 40px;
@@ -882,6 +882,7 @@ body {
 .center-container .content .top {
 	padding: 15px;
 	background: -webkit-gradient(linear, 0 0, 100% 0, from(#ff9924), to(#fe5300));
+	background: #ff9924;
 	border-radius: 8px 8px 0 0;
 	display: flex;
 	align-items: center;
@@ -2132,7 +2133,7 @@ a.pink {
 }
 
 .page {
-	padding: 10px;
+	padding: 10px;font-size: 14px;
 	text-align: left;
 }
 
@@ -2222,7 +2223,6 @@ uni-button:after {
 .page .logo img {
 	margin: 10px auto;
 	width: 30%;
-	max-height: 120px;
 	border-radius: 10px;
 	box-shadow: 0 2px 5px 0 #f80;
 }
