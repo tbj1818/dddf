@@ -22,7 +22,7 @@
             "mode" : "hash",
             "base" : "/studio/"
         },
-        "domain" : "http://114.116.73.182:8082/"
+        "domain" : "http://114.116.73.182:8080/"
     },
     "app-plus" : {
         "nvueCompiler" : "uni-app",

@@ -1,8 +1,6 @@
 
-// const baseUrl = "http://wenaqing.gicp.net";			//家里
-// const baseUrl = "http://153t69r733.iok.la";			//公司
 const baseUrl = "http://114.116.73.182:8080";			//测试服务器
-const webbaseUrl = "http://114.116.73.182:8082";			//测试服务器
+const webbaseUrl = "http://114.116.73.182:8080";			//测试服务器
 // 发起post请求，请求后台
 function sendPost(url, postData) {
   url = baseUrl + url;
